@@ -1,0 +1,15 @@
+{
+    "name": "CarRental",
+    "alias": "carrental",
+    "description": "",
+    "keywords": [],
+    "active": 0,
+    "order": 80,
+    "providers": [
+        "Modules\\CarRental\\Providers\\CarRentalServiceProvider",
+        "Modules\\CarRental\\Providers\\RouteServiceProvider"
+    ],
+    "aliases": [],
+    "files": [],
+    "requires": []
+}
