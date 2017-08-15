@@ -181,6 +181,13 @@ class CarController extends AdminBaseController
             $car->series()->associate($series);
         }
 
+        $prices = new CarPrice($request->get('prices'));
+        if(!count($car->prices)) {
+            $car->prices()->save($prices);
+        } else {
+            $car->prices()->update($prices->toArray());
+        }
+
         $car->save();
 
         return redirect()->route('admin.carrental.car.index')

@@ -24,7 +24,7 @@ class CreateCarClassRequest extends BaseFormRequest
     public function rules()
     {
         return [
-            'ordering' => 'required|integer|max:7'
+            'ordering' => 'required|integer|digits_between:1,5'
         ];
     }
 

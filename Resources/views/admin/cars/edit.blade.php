@@ -23,6 +23,7 @@
                 <ul class="nav nav-tabs">
                     <li class="active"><a href="#car" data-toggle="tab">{{ trans('carrental::cars.title.car') }}</a></li>
                     <li><a href="#images" data-toggle="tab">{{ trans('carrental::cars.title.images') }}</a></li>
+                    <li><a href="#prices" data-toggle="tab">{{ trans('carrental::cars.title.prices') }}</a></li>
                 </ul>
                 <div class="tab-content">
                     <div class="tab-pane active" id="car">
@@ -32,6 +33,30 @@
                         <div class="form-group">
                             @mediaMultiple('carImages', $car, null, trans('carrental::cars.title.images'))
                         </div>
+                    </div>
+                    <div class="tab-pane" id="prices">
+                        <table class="table table-bordered">
+                            <thead>
+                            <tr>
+                                <th>1-3 Gün</th>
+                                <th>4-7 Gün</th>
+                                <th>8-14 Gün</th>
+                                <th>15-20 Gün</th>
+                                <th>21-27 Gün</th>
+                                <th>28+ Gün</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>{!! BSForm::text("prices[price1]", old("prices[price1]", $car->prices->price1)) !!}</td>
+                                    <td>{!! BSForm::text("prices[price2]", old("prices[price2]", $car->prices->price2)) !!}</td>
+                                    <td>{!! BSForm::text("prices[price3]", old("prices[price3]", $car->prices->price3)) !!}</td>
+                                    <td>{!! BSForm::text("prices[price4]", old("prices[price4]", $car->prices->price4)) !!}</td>
+                                    <td>{!! BSForm::text("prices[price5]", old("prices[price5]", $car->prices->price5)) !!}</td>
+                                    <td>{!! BSForm::text("prices[price6]", old("prices[price6]", $car->prices->price6)) !!}</td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
 
                     <div class="box-footer">

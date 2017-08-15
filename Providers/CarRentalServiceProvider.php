@@ -41,7 +41,9 @@ class CarRentalServiceProvider extends ServiceProvider
 
     public function boot()
     {
-        //$this->publishConfig('carrental', 'permissions');
+        $this->publishConfig('carrental', 'permissions');
+        $this->publishConfig('carrental', 'config');
+
 		$this->loadMigrationsFrom(__DIR__ . '/../Database/Migrations');
 
         view()->composer('carrental::*', CarComposer::class);

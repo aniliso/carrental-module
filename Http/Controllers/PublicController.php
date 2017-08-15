@@ -41,7 +41,7 @@ class PublicController extends BasePublicController
 
         /* Start Default Breadcrumbs */
         Breadcrumbs::register('carrental.index', function($breadcrumbs) {
-            $breadcrumbs->push("Kiralık Araçlar", route('carrental.index'));
+            $breadcrumbs->push(trans('themes::carrental.rental cars'), route('carrental.index'));
         });
         /* End Default Breadcrumbs */
 
@@ -57,8 +57,8 @@ class PublicController extends BasePublicController
 
         $reservation = $request->session()->get('reservation');
 
-        $this->setTitle("Kiralık Araçlar")
-            ->setDescription("Ankara içi ve dışı araç kiralama hizmeti vermekteyiz.");
+        $this->setTitle(trans('themes::carrental.rental cars'))
+            ->setDescription(trans('themes::carrental.seo description'));
 
         $this->setUrl(route('carrental.index'))
             ->addMeta('robots', "index, follow");
