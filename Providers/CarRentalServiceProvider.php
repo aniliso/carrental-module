@@ -6,6 +6,7 @@ use Illuminate\Foundation\AliasLoader;
 use Illuminate\Support\ServiceProvider;
 use Modules\CarRental\Composers\CarComposer;
 use Modules\CarRental\Entities\CarModel;
+use Modules\CarRental\Events\Handlers\RegisterCarRentalSidebar;
 use Modules\CarRental\Facades\AvailableStatusFacade;
 use Modules\CarRental\Facades\CarBodyTypeFacade;
 use Modules\CarRental\Facades\CarBrandRepositoryFacade;
@@ -16,11 +17,13 @@ use Modules\CarRental\Facades\CarFuelTypeFacade;
 use Modules\CarRental\Facades\CarHorsePowerFacade;
 use Modules\CarRental\Facades\CarLocationsFacade;
 use Modules\CarRental\Facades\CarTransmissionFacade;
+use Modules\Core\Events\BuildingSidebar;
+use Modules\Core\Traits\CanGetSidebarClassForModule;
 use Modules\Core\Traits\CanPublishConfiguration;
 
 class CarRentalServiceProvider extends ServiceProvider
 {
-    use CanPublishConfiguration;
+    use CanPublishConfiguration, CanGetSidebarClassForModule;
     /**
      * Indicates if loading of the provider is deferred.
      *
@@ -37,6 +40,11 @@ class CarRentalServiceProvider extends ServiceProvider
     {
         $this->registerBindings();
         $this->registerFacades();
+
+        $this->app['events']->listen(
+            BuildingSidebar::class,
+            $this->getSidebarClassForModule('carrental', RegisterCarRentalSidebar::class)
+        );
     }
 
     public function boot()

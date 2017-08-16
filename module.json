@@ -1,6 +1,7 @@
 {
     "name": "CarRental",
     "alias": "carrental",
+    "version": "1.0.1",
     "description": "",
     "keywords": [],
     "active": 0,
