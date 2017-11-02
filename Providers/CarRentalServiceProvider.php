@@ -45,6 +45,11 @@ class CarRentalServiceProvider extends ServiceProvider
             BuildingSidebar::class,
             $this->getSidebarClassForModule('carrental', RegisterCarRentalSidebar::class)
         );
+
+        $this->app->extend('asgard.ModulesList', function($app) {
+            array_push($app, 'carrental');
+            return $app;
+        });
     }
 
     public function boot()
