@@ -4,8 +4,8 @@
     "version": "1.0.1",
     "description": "",
     "keywords": [],
-    "active": 0,
-    "order": 80,
+    "active": 1,
+    "order": 120,
     "providers": [
         "Modules\\CarRental\\Providers\\CarRentalServiceProvider",
         "Modules\\CarRental\\Providers\\RouteServiceProvider"
