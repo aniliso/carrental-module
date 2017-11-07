@@ -41,12 +41,8 @@
         <div class="col-md-2">
             <div class="box box-primary">
                 <div class="box-body">
-                    {!! BSControlGroup::generate(
-                        BSForm::label('status', trans('carrental::cars.form.status')),
-                        BSForm::checkbox('status', "1", old('status'), ['class'=>'flat-blue']),
-                        BSForm::help($errors->first('status')),
-                        4
-                    ) !!}
+					{!! Form::hidden('status', 0) !!}
+					{!! Form::normalCheckbox('status', trans('carrental::cars.form.status'), $errors) !!}
                     {!! Form::normalInput('ordering', trans('carrental::carclasses.form.ordering'), $errors) !!}
                 </div>
             </div>
