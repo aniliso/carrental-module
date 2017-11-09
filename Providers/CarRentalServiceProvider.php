@@ -1,27 +1,27 @@
 <?php
 
-namespace Modules\CarRental\Providers;
+namespace Modules\Carrental\Providers;
 
 use Illuminate\Foundation\AliasLoader;
 use Illuminate\Support\ServiceProvider;
-use Modules\CarRental\Composers\CarComposer;
-use Modules\CarRental\Entities\CarModel;
-use Modules\CarRental\Events\Handlers\RegisterCarRentalSidebar;
-use Modules\CarRental\Facades\AvailableStatusFacade;
-use Modules\CarRental\Facades\CarBodyTypeFacade;
-use Modules\CarRental\Facades\CarBrandRepositoryFacade;
-use Modules\CarRental\Facades\CarClassRepositoryFacade;
-use Modules\CarRental\Facades\CarColorFacade;
-use Modules\CarRental\Facades\CarEngineCapacityFacade;
-use Modules\CarRental\Facades\CarFuelTypeFacade;
-use Modules\CarRental\Facades\CarHorsePowerFacade;
-use Modules\CarRental\Facades\CarLocationsFacade;
-use Modules\CarRental\Facades\CarTransmissionFacade;
+use Modules\Carrental\Composers\CarComposer;
+use Modules\Carrental\Entities\CarModel;
+use Modules\Carrental\Events\Handlers\RegisterCarrentalSidebar;
+use Modules\Carrental\Facades\AvailableStatusFacade;
+use Modules\Carrental\Facades\CarBodyTypeFacade;
+use Modules\Carrental\Facades\CarBrandRepositoryFacade;
+use Modules\Carrental\Facades\CarClassRepositoryFacade;
+use Modules\Carrental\Facades\CarColorFacade;
+use Modules\Carrental\Facades\CarEngineCapacityFacade;
+use Modules\Carrental\Facades\CarFuelTypeFacade;
+use Modules\Carrental\Facades\CarHorsePowerFacade;
+use Modules\Carrental\Facades\CarLocationsFacade;
+use Modules\Carrental\Facades\CarTransmissionFacade;
 use Modules\Core\Events\BuildingSidebar;
 use Modules\Core\Traits\CanGetSidebarClassForModule;
 use Modules\Core\Traits\CanPublishConfiguration;
 
-class CarRentalServiceProvider extends ServiceProvider
+class CarrentalServiceProvider extends ServiceProvider
 {
     use CanPublishConfiguration, CanGetSidebarClassForModule;
     /**
@@ -43,7 +43,7 @@ class CarRentalServiceProvider extends ServiceProvider
 
         $this->app['events']->listen(
             BuildingSidebar::class,
-            $this->getSidebarClassForModule('carrental', RegisterCarRentalSidebar::class)
+            $this->getSidebarClassForModule('carrental', RegisterCarrentalSidebar::class)
         );
 
         $this->app->extend('asgard.ModulesList', function($app) {
@@ -75,111 +75,111 @@ class CarRentalServiceProvider extends ServiceProvider
     private function registerBindings()
     {
         $this->app->bind(
-            'Modules\CarRental\Repositories\CarRepository',
+            'Modules\Carrental\Repositories\CarRepository',
             function () {
-                $repository = new \Modules\CarRental\Repositories\Eloquent\EloquentCarRepository(new \Modules\CarRental\Entities\Car());
+                $repository = new \Modules\Carrental\Repositories\Eloquent\EloquentCarRepository(new \Modules\Carrental\Entities\Car());
 
                 if (! config('app.cache')) {
                     return $repository;
                 }
 
-                return new \Modules\CarRental\Repositories\Cache\CacheCarDecorator($repository);
+                return new \Modules\Carrental\Repositories\Cache\CacheCarDecorator($repository);
             }
         );
         $this->app->bind(
-            'Modules\CarRental\Repositories\CarBrandRepository',
+            'Modules\Carrental\Repositories\CarBrandRepository',
             function () {
-                $repository = new \Modules\CarRental\Repositories\Eloquent\EloquentCarBrandRepository(new \Modules\CarRental\Entities\CarBrand());
+                $repository = new \Modules\Carrental\Repositories\Eloquent\EloquentCarBrandRepository(new \Modules\Carrental\Entities\CarBrand());
 
                 if (! config('app.cache')) {
                     return $repository;
                 }
 
-                return new \Modules\CarRental\Repositories\Cache\CacheCarBrandDecorator($repository);
+                return new \Modules\Carrental\Repositories\Cache\CacheCarBrandDecorator($repository);
             }
         );
         $this->app->bind(
-            'Modules\CarRental\Repositories\CarModelRepository',
+            'Modules\Carrental\Repositories\CarModelRepository',
             function () {
-                $repository = new \Modules\CarRental\Repositories\Eloquent\EloquentCarModelRepository(new \Modules\CarRental\Entities\CarModel());
+                $repository = new \Modules\Carrental\Repositories\Eloquent\EloquentCarModelRepository(new \Modules\Carrental\Entities\CarModel());
 
                 if (! config('app.cache')) {
                     return $repository;
                 }
 
-                return new \Modules\CarRental\Repositories\Cache\CacheCarModelDecorator($repository);
+                return new \Modules\Carrental\Repositories\Cache\CacheCarModelDecorator($repository);
             }
         );
         $this->app->bind(
-            'Modules\CarRental\Repositories\CarSeriesRepository',
+            'Modules\Carrental\Repositories\CarSeriesRepository',
             function () {
-                $repository = new \Modules\CarRental\Repositories\Eloquent\EloquentCarSeriesRepository(new \Modules\CarRental\Entities\CarSeries());
+                $repository = new \Modules\Carrental\Repositories\Eloquent\EloquentCarSeriesRepository(new \Modules\Carrental\Entities\CarSeries());
 
                 if (! config('app.cache')) {
                     return $repository;
                 }
 
-                return new \Modules\CarRental\Repositories\Cache\CacheCarSeriesDecorator($repository);
+                return new \Modules\Carrental\Repositories\Cache\CacheCarSeriesDecorator($repository);
             }
         );
         $this->app->bind(
-            'Modules\CarRental\Repositories\CarClassRepository',
+            'Modules\Carrental\Repositories\CarClassRepository',
             function () {
-                $repository = new \Modules\CarRental\Repositories\Eloquent\EloquentCarClassRepository(new \Modules\CarRental\Entities\CarClass());
+                $repository = new \Modules\Carrental\Repositories\Eloquent\EloquentCarClassRepository(new \Modules\Carrental\Entities\CarClass());
 
                 if (! config('app.cache')) {
                     return $repository;
                 }
 
-                return new \Modules\CarRental\Repositories\Cache\CacheCarClassDecorator($repository);
+                return new \Modules\Carrental\Repositories\Cache\CacheCarClassDecorator($repository);
             }
         );
         $this->app->bind(
-            'Modules\CarRental\Repositories\CarPriceRepository',
+            'Modules\Carrental\Repositories\CarPriceRepository',
             function () {
-                $repository = new \Modules\CarRental\Repositories\Eloquent\EloquentCarPriceRepository(new \Modules\CarRental\Entities\CarPrice());
+                $repository = new \Modules\Carrental\Repositories\Eloquent\EloquentCarPriceRepository(new \Modules\Carrental\Entities\CarPrice());
 
                 if (! config('app.cache')) {
                     return $repository;
                 }
 
-                return new \Modules\CarRental\Repositories\Cache\CacheCarPriceDecorator($repository);
+                return new \Modules\Carrental\Repositories\Cache\CacheCarPriceDecorator($repository);
             }
         );
         $this->app->bind(
-            'Modules\CarRental\Repositories\LocationsRepository',
+            'Modules\Carrental\Repositories\LocationsRepository',
             function () {
-                $repository = new \Modules\CarRental\Repositories\Eloquent\EloquentLocationsRepository(new \Modules\CarRental\Entities\Locations());
+                $repository = new \Modules\Carrental\Repositories\Eloquent\EloquentLocationsRepository(new \Modules\Carrental\Entities\Locations());
 
                 if (! config('app.cache')) {
                     return $repository;
                 }
 
-                return new \Modules\CarRental\Repositories\Cache\CacheLocationsDecorator($repository);
+                return new \Modules\Carrental\Repositories\Cache\CacheLocationsDecorator($repository);
             }
         );
         $this->app->bind(
-            'Modules\CarRental\Repositories\LocationRepository',
+            'Modules\Carrental\Repositories\LocationRepository',
             function () {
-                $repository = new \Modules\CarRental\Repositories\Eloquent\EloquentLocationRepository(new \Modules\CarRental\Entities\Location());
+                $repository = new \Modules\Carrental\Repositories\Eloquent\EloquentLocationRepository(new \Modules\Carrental\Entities\Location());
 
                 if (! config('app.cache')) {
                     return $repository;
                 }
 
-                return new \Modules\CarRental\Repositories\Cache\CacheLocationDecorator($repository);
+                return new \Modules\Carrental\Repositories\Cache\CacheLocationDecorator($repository);
             }
         );
         $this->app->bind(
-            'Modules\CarRental\Repositories\ReservationRepository',
+            'Modules\Carrental\Repositories\ReservationRepository',
             function () {
-                $repository = new \Modules\CarRental\Repositories\Eloquent\EloquentReservationRepository(new \Modules\CarRental\Entities\Reservation());
+                $repository = new \Modules\Carrental\Repositories\Eloquent\EloquentReservationRepository(new \Modules\Carrental\Entities\Reservation());
 
                 if (! config('app.cache')) {
                     return $repository;
                 }
 
-                return new \Modules\CarRental\Repositories\Cache\CacheReservationDecorator($repository);
+                return new \Modules\Carrental\Repositories\Cache\CacheReservationDecorator($repository);
             }
         );
     }

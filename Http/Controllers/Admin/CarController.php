@@ -1,18 +1,18 @@
 <?php
 
-namespace Modules\CarRental\Http\Controllers\Admin;
+namespace Modules\Carrental\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use Modules\CarRental\Entities\Car;
-use Modules\CarRental\Entities\CarPrice;
-use Modules\CarRental\Http\Requests\Car\CarCreateRequest;
-use Modules\CarRental\Http\Requests\Car\CarUpdateRequest;
-use Modules\CarRental\Repositories\CarBrandRepository;
-use Modules\CarRental\Repositories\CarClassRepository;
-use Modules\CarRental\Repositories\CarModelRepository;
-use Modules\CarRental\Repositories\CarRepository;
-use Modules\CarRental\Repositories\CarSeriesRepository;
+use Modules\Carrental\Entities\Car;
+use Modules\Carrental\Entities\CarPrice;
+use Modules\Carrental\Http\Requests\Car\CarCreateRequest;
+use Modules\Carrental\Http\Requests\Car\CarUpdateRequest;
+use Modules\Carrental\Repositories\CarBrandRepository;
+use Modules\Carrental\Repositories\CarClassRepository;
+use Modules\Carrental\Repositories\CarModelRepository;
+use Modules\Carrental\Repositories\CarRepository;
+use Modules\Carrental\Repositories\CarSeriesRepository;
 use Modules\Core\Http\Controllers\Admin\AdminBaseController;
 use Modules\Media\Repositories\FileRepository;
 

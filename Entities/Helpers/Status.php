@@ -1,4 +1,4 @@
-<?php namespace Modules\CarRental\Entities\Helpers;
+<?php namespace Modules\Carrental\Entities\Helpers;
 
 class Status
 {

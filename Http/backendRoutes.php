@@ -6,7 +6,7 @@ use Illuminate\Routing\Router;
 $router->group(['prefix' =>'/carrental'], function (Router $router) {
 
     $router->bind('car', function ($id) {
-        return app('Modules\CarRental\Repositories\CarRepository')->find($id);
+        return app('Modules\Carrental\Repositories\CarRepository')->find($id);
     });
     $router->get('cars', [
         'as' => 'admin.carrental.car.index',
@@ -52,7 +52,7 @@ $router->group(['prefix' =>'/carrental'], function (Router $router) {
     ]);
 
     $router->bind('carbrand', function ($id) {
-        return app('Modules\CarRental\Repositories\CarBrandRepository')->find($id);
+        return app('Modules\Carrental\Repositories\CarBrandRepository')->find($id);
     });
     $router->get('carbrands', [
         'as' => 'admin.carrental.carbrand.index',
@@ -86,7 +86,7 @@ $router->group(['prefix' =>'/carrental'], function (Router $router) {
     ]);
 
     $router->bind('carmodel', function ($id) {
-        return app('Modules\CarRental\Repositories\CarModelRepository')->find($id);
+        return app('Modules\Carrental\Repositories\CarModelRepository')->find($id);
     });
     $router->get('carmodels', [
         'as' => 'admin.carrental.carmodel.index',
@@ -120,7 +120,7 @@ $router->group(['prefix' =>'/carrental'], function (Router $router) {
     ]);
 
     $router->bind('carseries', function ($id) {
-        return app('Modules\CarRental\Repositories\CarSeriesRepository')->find($id);
+        return app('Modules\Carrental\Repositories\CarSeriesRepository')->find($id);
     });
     $router->get('carseries', [
         'as' => 'admin.carrental.carseries.index',
@@ -153,7 +153,7 @@ $router->group(['prefix' =>'/carrental'], function (Router $router) {
         'middleware' => 'can:carrental.carseries.destroy'
     ]);
     $router->bind('carclass', function ($id) {
-        return app('Modules\CarRental\Repositories\CarClassRepository')->find($id);
+        return app('Modules\Carrental\Repositories\CarClassRepository')->find($id);
     });
     $router->get('carclasses', [
         'as' => 'admin.carrental.carclass.index',
@@ -187,7 +187,7 @@ $router->group(['prefix' =>'/carrental'], function (Router $router) {
     ]);
 
     $router->bind('location', function ($id) {
-        return app('Modules\CarRental\Repositories\LocationRepository')->find($id);
+        return app('Modules\Carrental\Repositories\LocationRepository')->find($id);
     });
     $router->get('locations', [
         'as' => 'admin.carrental.location.index',
@@ -220,7 +220,7 @@ $router->group(['prefix' =>'/carrental'], function (Router $router) {
         'middleware' => 'can:carrental.locations.destroy'
     ]);
     $router->bind('reservation', function ($id) {
-        return app('Modules\CarRental\Repositories\ReservationRepository')->find($id);
+        return app('Modules\Carrental\Repositories\ReservationRepository')->find($id);
     });
     $router->get('reservations', [
         'as' => 'admin.carrental.reservation.index',

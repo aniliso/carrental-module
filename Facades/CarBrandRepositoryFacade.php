@@ -1,7 +1,7 @@
-<?php namespace Modules\CarRental\Facades;
+<?php namespace Modules\Carrental\Facades;
 
 use Illuminate\Support\Facades\Facade;
-use Modules\CarRental\Repositories\CarBrandRepository;
+use Modules\Carrental\Repositories\CarBrandRepository;
 
 class CarBrandRepositoryFacade extends Facade
 {

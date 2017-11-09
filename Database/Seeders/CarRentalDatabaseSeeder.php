@@ -1,11 +1,11 @@
 <?php
 
-namespace Modules\CarRental\Database\Seeders;
+namespace Modules\Carrental\Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Illuminate\Database\Eloquent\Model;
 
-class CarRentalDatabaseSeeder extends Seeder
+class CarrentalDatabaseSeeder extends Seeder
 {
     /**
      * Run the database seeds.

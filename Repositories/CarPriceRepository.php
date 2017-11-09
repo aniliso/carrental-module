@@ -1,4 +1,4 @@
-<?php namespace Modules\CarRental\Repositories;
+<?php namespace Modules\Carrental\Repositories;
 
 use Modules\Core\Repositories\BaseRepository;
 

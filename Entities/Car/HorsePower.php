@@ -1,4 +1,4 @@
-<?php namespace Modules\CarRental\Entities\Car;
+<?php namespace Modules\Carrental\Entities\Car;
 
 
 class HorsePower

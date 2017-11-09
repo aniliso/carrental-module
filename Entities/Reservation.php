@@ -1,10 +1,10 @@
 <?php
 
-namespace Modules\CarRental\Entities;
+namespace Modules\Carrental\Entities;
 
 use Illuminate\Database\Eloquent\Model;
 use Laracasts\Presenter\PresentableTrait;
-use Modules\CarRental\Presenters\ReservationPresenter;
+use Modules\Carrental\Presenters\ReservationPresenter;
 
 class Reservation extends Model
 {

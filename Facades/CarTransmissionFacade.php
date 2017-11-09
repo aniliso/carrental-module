@@ -1,8 +1,8 @@
-<?php namespace Modules\CarRental\Facades;
+<?php namespace Modules\Carrental\Facades;
 
 
 use Illuminate\Support\Facades\Facade;
-use Modules\CarRental\Entities\Car\Transmission;
+use Modules\Carrental\Entities\Car\Transmission;
 
 class CarTransmissionFacade extends Facade
 {

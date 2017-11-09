@@ -1,11 +1,11 @@
 <?php
 
-namespace Modules\CarRental\Repositories\Eloquent;
+namespace Modules\Carrental\Repositories\Eloquent;
 
-use Modules\CarRental\Events\Brand\BrandWasCreated;
-use Modules\CarRental\Events\Brand\BrandWasDeleted;
-use Modules\CarRental\Events\Brand\BrandWasUpdated;
-use Modules\CarRental\Repositories\CarBrandRepository;
+use Modules\Carrental\Events\Brand\BrandWasCreated;
+use Modules\Carrental\Events\Brand\BrandWasDeleted;
+use Modules\Carrental\Events\Brand\BrandWasUpdated;
+use Modules\Carrental\Repositories\CarBrandRepository;
 use Modules\Core\Repositories\Eloquent\EloquentBaseRepository;
 
 class EloquentCarBrandRepository extends EloquentBaseRepository implements CarBrandRepository

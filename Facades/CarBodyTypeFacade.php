@@ -1,7 +1,7 @@
-<?php namespace Modules\CarRental\Facades;
+<?php namespace Modules\Carrental\Facades;
 
 use Illuminate\Support\Facades\Facade;
-use Modules\CarRental\Entities\Car\Body;
+use Modules\Carrental\Entities\Car\Body;
 
 class CarBodyTypeFacade extends Facade
 {

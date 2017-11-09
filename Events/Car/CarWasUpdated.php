@@ -1,7 +1,7 @@
-<?php namespace Modules\CarRental\Events\Car;
+<?php namespace Modules\Carrental\Events\Car;
 
 use Modules\Media\Contracts\StoringMedia;
-use Modules\CarRental\Entities\Car;
+use Modules\Carrental\Entities\Car;
 
 class CarWasUpdated implements StoringMedia
 {

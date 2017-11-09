@@ -1,13 +1,13 @@
 <?php
 
-namespace Modules\CarRental\Events\Handlers;
+namespace Modules\Carrental\Events\Handlers;
 
 use Maatwebsite\Sidebar\Group;
 use Maatwebsite\Sidebar\Item;
 use Maatwebsite\Sidebar\Menu;
 use Modules\Core\Sidebar\AbstractAdminSidebar;
 
-class RegisterCarRentalSidebar extends AbstractAdminSidebar
+class RegisterCarrentalSidebar extends AbstractAdminSidebar
 {
     /**
      * @param Menu $menu

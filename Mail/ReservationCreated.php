@@ -1,11 +1,11 @@
 <?php
 
-namespace Modules\CarRental\Mail;
+namespace Modules\Carrental\Mail;
 
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
-use Modules\CarRental\Entities\Reservation;
+use Modules\Carrental\Entities\Reservation;
 
 class ReservationCreated extends Mailable
 {

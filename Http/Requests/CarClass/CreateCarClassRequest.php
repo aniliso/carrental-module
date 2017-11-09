@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\CarRental\Http\Requests\CarClass;
+namespace Modules\Carrental\Http\Requests\CarClass;
 
 use Modules\Core\Internationalisation\BaseFormRequest;
 

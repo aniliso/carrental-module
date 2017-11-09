@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\CarRental\Entities;
+namespace Modules\Carrental\Entities;
 
 use Dimsav\Translatable\Translatable;
 use Illuminate\Database\Eloquent\Model;

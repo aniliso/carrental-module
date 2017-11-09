@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\CarRental\Events\Brand;
+namespace Modules\Carrental\Events\Brand;
 
 use Modules\Media\Contracts\DeletingMedia;
 

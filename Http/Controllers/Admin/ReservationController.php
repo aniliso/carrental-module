@@ -1,11 +1,11 @@
 <?php
 
-namespace Modules\CarRental\Http\Controllers\Admin;
+namespace Modules\Carrental\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use Modules\CarRental\Entities\Reservation;
-use Modules\CarRental\Repositories\ReservationRepository;
+use Modules\Carrental\Entities\Reservation;
+use Modules\Carrental\Repositories\ReservationRepository;
 use Modules\Core\Http\Controllers\Admin\AdminBaseController;
 
 class ReservationController extends AdminBaseController

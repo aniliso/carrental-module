@@ -1,17 +1,17 @@
 <?php
 
-namespace Modules\CarRental\Http\Controllers;
+namespace Modules\Carrental\Http\Controllers;
 
 use Breadcrumbs;
 use Illuminate\Foundation\Application;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use Modules\CarRental\Entities\Car;
-use Modules\CarRental\Entities\Reservation;
-use Modules\CarRental\Http\Requests\Reservation\CreateReservationRequest;
-use Modules\CarRental\Mail\ReservationCreated;
-use Modules\CarRental\Repositories\CarRepository;
-use Modules\CarRental\Repositories\ReservationRepository;
+use Modules\Carrental\Entities\Car;
+use Modules\Carrental\Entities\Reservation;
+use Modules\Carrental\Http\Requests\Reservation\CreateReservationRequest;
+use Modules\Carrental\Mail\ReservationCreated;
+use Modules\Carrental\Repositories\CarRepository;
+use Modules\Carrental\Repositories\ReservationRepository;
 use Modules\Core\Http\Controllers\BasePublicController;
 
 class PublicController extends BasePublicController

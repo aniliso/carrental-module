@@ -1,8 +1,8 @@
 <?php
 
-namespace Modules\CarRental\Repositories\Eloquent;
+namespace Modules\Carrental\Repositories\Eloquent;
 
-use Modules\CarRental\Repositories\CarModelRepository;
+use Modules\Carrental\Repositories\CarModelRepository;
 use Modules\Core\Repositories\Eloquent\EloquentBaseRepository;
 
 class EloquentCarModelRepository extends EloquentBaseRepository implements CarModelRepository

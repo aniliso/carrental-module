@@ -6,7 +6,7 @@ use Illuminate\Routing\Router;
 $router->group([], function (Router $router) {
 
     $router->bind('car', function ($id) {
-        return app('Modules\CarRental\Repositories\CarRepository')->find($id);
+        return app('Modules\Carrental\Repositories\CarRepository')->find($id);
     });
 
     $router->get(LaravelLocalization::transRoute('carrental::routes.cars'), [

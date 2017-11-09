@@ -1,7 +1,7 @@
 <?php
 
 return [
-    'name' => 'CarRental',
+    'name' => 'Carrental',
     /*
     |--------------------------------------------------------------------------
     | Load additional view namespaces for a module

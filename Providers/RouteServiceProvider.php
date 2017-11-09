@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\CarRental\Providers;
+namespace Modules\Carrental\Providers;
 
 use Modules\Core\Providers\RoutingServiceProvider as CoreRoutingServiceProvider;
 
@@ -10,7 +10,7 @@ class RouteServiceProvider extends CoreRoutingServiceProvider
      * The root namespace to assume when generating URLs to actions.
      * @var string
      */
-    protected $namespace = 'Modules\CarRental\Http\Controllers';
+    protected $namespace = 'Modules\Carrental\Http\Controllers';
 
     /**
      * @return string

@@ -1,14 +1,14 @@
 <?php
 
-namespace Modules\CarRental\Repositories\Eloquent;
+namespace Modules\Carrental\Repositories\Eloquent;
 
-use Modules\CarRental\Entities\Car;
-use Modules\CarRental\Entities\Car\AvailableStatuses;
-use Modules\CarRental\Entities\Helpers\Status;
-use Modules\CarRental\Events\Car\CarWasCreated;
-use Modules\CarRental\Events\Car\CarWasDeleted;
-use Modules\CarRental\Events\Car\CarWasUpdated;
-use Modules\CarRental\Repositories\CarRepository;
+use Modules\Carrental\Entities\Car;
+use Modules\Carrental\Entities\Car\AvailableStatuses;
+use Modules\Carrental\Entities\Helpers\Status;
+use Modules\Carrental\Events\Car\CarWasCreated;
+use Modules\Carrental\Events\Car\CarWasDeleted;
+use Modules\Carrental\Events\Car\CarWasUpdated;
+use Modules\Carrental\Repositories\CarRepository;
 use Modules\Core\Repositories\Eloquent\EloquentBaseRepository;
 
 class EloquentCarRepository extends EloquentBaseRepository implements CarRepository

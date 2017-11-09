@@ -1,11 +1,11 @@
 <?php
 
-namespace Modules\CarRental\Http\Controllers\Admin;
+namespace Modules\Carrental\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use Modules\CarRental\Entities\Location;
-use Modules\CarRental\Repositories\LocationRepository;
+use Modules\Carrental\Entities\Location;
+use Modules\Carrental\Repositories\LocationRepository;
 use Modules\Core\Http\Controllers\Admin\AdminBaseController;
 
 class LocationController extends AdminBaseController

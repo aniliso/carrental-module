@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\CarRental\Entities;
+namespace Modules\Carrental\Entities;
 
 use Illuminate\Database\Eloquent\Model;
 use Modules\Media\Support\Traits\MediaRelation;

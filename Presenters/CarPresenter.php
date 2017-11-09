@@ -1,4 +1,4 @@
-<?php namespace Modules\CarRental\Presenters;
+<?php namespace Modules\Carrental\Presenters;
 
 use Laracasts\Presenter\Presenter;
 

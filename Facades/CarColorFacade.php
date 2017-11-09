@@ -1,8 +1,8 @@
-<?php namespace Modules\CarRental\Facades;
+<?php namespace Modules\Carrental\Facades;
 
 
 use Barryvdh\Debugbar\Facade;
-use Modules\CarRental\Entities\Car\Color;
+use Modules\Carrental\Entities\Car\Color;
 
 class CarColorFacade extends Facade
 {

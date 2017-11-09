@@ -1,8 +1,8 @@
-<?php namespace Modules\CarRental\Facades;
+<?php namespace Modules\Carrental\Facades;
 
 
 use Illuminate\Support\Facades\Facade;
-use Modules\CarRental\Entities\Car\HorsePower;
+use Modules\Carrental\Entities\Car\HorsePower;
 
 class CarHorsePowerFacade extends Facade
 {

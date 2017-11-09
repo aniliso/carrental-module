@@ -1,8 +1,8 @@
 <?php
 
-namespace Modules\CarRental\Repositories\Cache;
+namespace Modules\Carrental\Repositories\Cache;
 
-use Modules\CarRental\Repositories\ReservationRepository;
+use Modules\Carrental\Repositories\ReservationRepository;
 use Modules\Core\Repositories\Cache\BaseCacheDecorator;
 
 class CacheReservationDecorator extends BaseCacheDecorator implements ReservationRepository

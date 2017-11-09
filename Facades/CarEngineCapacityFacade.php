@@ -1,8 +1,8 @@
-<?php namespace Modules\CarRental\Facades;
+<?php namespace Modules\Carrental\Facades;
 
 
 use Barryvdh\Debugbar\Facade;
-use Modules\CarRental\Entities\Car\EngineCapacity;
+use Modules\Carrental\Entities\Car\EngineCapacity;
 
 class CarEngineCapacityFacade extends Facade
 {

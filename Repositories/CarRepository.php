@@ -1,6 +1,6 @@
 <?php
 
-namespace Modules\CarRental\Repositories;
+namespace Modules\Carrental\Repositories;
 
 use Modules\Core\Repositories\BaseRepository;
 

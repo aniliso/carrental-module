@@ -1,8 +1,8 @@
 <?php
 
-namespace Modules\CarRental\Repositories\Eloquent;
+namespace Modules\Carrental\Repositories\Eloquent;
 
-use Modules\CarRental\Repositories\LocationsRepository;
+use Modules\Carrental\Repositories\LocationsRepository;
 use Modules\Core\Repositories\Eloquent\EloquentBaseRepository;
 
 class EloquentLocationsRepository extends EloquentBaseRepository implements LocationsRepository

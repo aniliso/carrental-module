@@ -1,18 +1,18 @@
-<?php namespace Modules\CarRental\Composers;
+<?php namespace Modules\Carrental\Composers;
 
 
 use Illuminate\View\View;
-use Modules\CarRental\Entities\Car\AvailableStatuses;
-use Modules\CarRental\Entities\Car\Body;
-use Modules\CarRental\Entities\Car\Color;
-use Modules\CarRental\Entities\Car\EngineCapacity;
-use Modules\CarRental\Entities\Car\Fuel;
-use Modules\CarRental\Entities\Car\HorsePower;
-use Modules\CarRental\Entities\Car\Transmission;
-use Modules\CarRental\Repositories\CarBrandRepository;
-use Modules\CarRental\Repositories\CarClassRepository;
-use Modules\CarRental\Repositories\CarModelRepository;
-use Modules\CarRental\Repositories\CarSeriesRepository;
+use Modules\Carrental\Entities\Car\AvailableStatuses;
+use Modules\Carrental\Entities\Car\Body;
+use Modules\Carrental\Entities\Car\Color;
+use Modules\Carrental\Entities\Car\EngineCapacity;
+use Modules\Carrental\Entities\Car\Fuel;
+use Modules\Carrental\Entities\Car\HorsePower;
+use Modules\Carrental\Entities\Car\Transmission;
+use Modules\Carrental\Repositories\CarBrandRepository;
+use Modules\Carrental\Repositories\CarClassRepository;
+use Modules\Carrental\Repositories\CarModelRepository;
+use Modules\Carrental\Repositories\CarSeriesRepository;
 
 class CarComposer
 {

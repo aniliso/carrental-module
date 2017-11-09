@@ -1,12 +1,12 @@
 <?php
 
-namespace Modules\CarRental\Entities;
+namespace Modules\Carrental\Entities;
 
 use Illuminate\Database\Eloquent\Model;
 use Laracasts\Presenter\PresentableTrait;
-use Modules\CarRental\Entities\Car\AvailableStatuses;
-use Modules\CarRental\Entities\Helpers\Status;
-use Modules\CarRental\Presenters\CarPresenter;
+use Modules\Carrental\Entities\Car\AvailableStatuses;
+use Modules\Carrental\Entities\Helpers\Status;
+use Modules\Carrental\Presenters\CarPresenter;
 use Modules\Media\Support\Traits\MediaRelation;
 
 class Car extends Model

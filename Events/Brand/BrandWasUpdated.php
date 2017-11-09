@@ -1,6 +1,6 @@
-<?php namespace Modules\CarRental\Events\Brand;
+<?php namespace Modules\Carrental\Events\Brand;
 
-use Modules\CarRental\Entities\CarBrand;
+use Modules\Carrental\Entities\CarBrand;
 use Modules\Media\Contracts\StoringMedia;
 
 class BrandWasUpdated implements StoringMedia

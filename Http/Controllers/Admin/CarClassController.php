@@ -1,13 +1,13 @@
 <?php
 
-namespace Modules\CarRental\Http\Controllers\Admin;
+namespace Modules\Carrental\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use Modules\CarRental\Entities\CarClass;
-use Modules\CarRental\Http\Requests\CarClass\CreateCarClassRequest;
-use Modules\CarRental\Http\Requests\CarClass\UpdateCarClassRequest;
-use Modules\CarRental\Repositories\CarClassRepository;
+use Modules\Carrental\Entities\CarClass;
+use Modules\Carrental\Http\Requests\CarClass\CreateCarClassRequest;
+use Modules\Carrental\Http\Requests\CarClass\UpdateCarClassRequest;
+use Modules\Carrental\Repositories\CarClassRepository;
 use Modules\Core\Http\Controllers\Admin\AdminBaseController;
 
 class CarClassController extends AdminBaseController

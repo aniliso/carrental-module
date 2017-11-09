@@ -1,5 +1,5 @@
 {
-    "name": "CarRental",
+    "name": "Carrental",
     "alias": "carrental",
     "version": "1.0.1",
     "description": "",
@@ -7,8 +7,8 @@
     "active": 1,
     "order": 120,
     "providers": [
-        "Modules\\CarRental\\Providers\\CarRentalServiceProvider",
-        "Modules\\CarRental\\Providers\\RouteServiceProvider"
+        "Modules\\Carrental\\Providers\\CarrentalServiceProvider",
+        "Modules\\Carrental\\Providers\\RouteServiceProvider"
     ],
     "aliases": [],
     "files": [],

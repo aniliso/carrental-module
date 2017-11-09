@@ -1,9 +1,9 @@
 <?php
 
-namespace Modules\CarRental\Repositories\Cache;
+namespace Modules\Carrental\Repositories\Cache;
 
-use Modules\CarRental\Entities\Car;
-use Modules\CarRental\Repositories\CarRepository;
+use Modules\Carrental\Entities\Car;
+use Modules\Carrental\Repositories\CarRepository;
 use Modules\Core\Repositories\Cache\BaseCacheDecorator;
 
 class CacheCarDecorator extends BaseCacheDecorator implements CarRepository

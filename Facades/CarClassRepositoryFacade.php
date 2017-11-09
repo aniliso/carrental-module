@@ -1,8 +1,8 @@
-<?php namespace Modules\CarRental\Facades;
+<?php namespace Modules\Carrental\Facades;
 
 use Illuminate\Support\Facades\Facade;
-use Modules\CarRental\Repositories\CarClassRepository;
-use Modules\CarRental\Repositories\CarModelRepository;
+use Modules\Carrental\Repositories\CarClassRepository;
+use Modules\Carrental\Repositories\CarModelRepository;
 
 class CarClassRepositoryFacade extends Facade
 {

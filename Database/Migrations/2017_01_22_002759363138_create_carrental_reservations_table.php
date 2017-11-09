@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateCarRentalReservationsTable extends Migration
+class CreateCarrentalReservationsTable extends Migration
 {
     /**
      * Run the migrations.

@@ -1,4 +1,4 @@
-<?php namespace Modules\CarRental\Events\Car;
+<?php namespace Modules\Carrental\Events\Car;
 
 use Modules\Media\Contracts\StoringMedia;
 

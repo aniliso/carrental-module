@@ -1,7 +1,7 @@
-<?php  namespace Modules\CarRental\Presenters;
+<?php  namespace Modules\Carrental\Presenters;
 
 use Laracasts\Presenter\Presenter;
-use Modules\CarRental\Repositories\LocationRepository;
+use Modules\Carrental\Repositories\LocationRepository;
 
 class ReservationPresenter extends Presenter
 {

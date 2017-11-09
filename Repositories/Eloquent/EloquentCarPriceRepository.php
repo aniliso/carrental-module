@@ -1,6 +1,6 @@
-<?php namespace Modules\CarRental\Repositories\Eloquent;
+<?php namespace Modules\Carrental\Repositories\Eloquent;
 
-use Modules\CarRental\Repositories\CarPriceRepository;
+use Modules\Carrental\Repositories\CarPriceRepository;
 use Modules\Core\Repositories\Eloquent\EloquentBaseRepository;
 
 class EloquentCarPriceRepository extends EloquentBaseRepository implements CarPriceRepository
