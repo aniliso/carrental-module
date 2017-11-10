@@ -89,7 +89,7 @@
 
         {!! BSControlGroup::generate(
             BSForm::label('licensed_at', trans('carrental::cars.form.licensed_at')),
-            BSInputGroup::withContents(BSForm::text('licensed_at', old('licensed_at', $car->licensed_at->formatLocalized('Y-m-d')), ['class'=>'date', 'id'=>'licensed_at']))->append('<span class="glyphicon glyphicon-calendar"></span>'),
+            BSInputGroup::withContents(BSForm::text('licensed_at', old('licensed_at', $car->licensed_at->format('Y-m-d')), ['class'=>'date', 'id'=>'licensed_at']))->append('<span class="glyphicon glyphicon-calendar"></span>'),
             BSForm::help($errors->first('licensed_at')),
             4
         )->withAttributes(['class'=>$errors->has("licensed_at") ? ' has-error' : '']) !!}
@@ -154,7 +154,7 @@
 
         {!! BSControlGroup::generate(
             BSForm::label('fuel_type', trans('carrental::cars.form.fuel_type')),
-            BSForm::select('fuel_type', $fuels, $car->fuel_type, ['class'=>'series ui fluid search dropdown']),
+            BSForm::select('fuel_type', $fuels, $car->fuel_type, ['class'=>'semantic ui fluid search dropdown']),
             BSForm::help($errors->first('fuel_type')),
             4
         )->withAttributes(['class'=>$errors->has("fuel_type") ? ' has-error' : '']) !!}

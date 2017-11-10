@@ -75,14 +75,32 @@
             $('.category.ui.dropdown').dropdown({
                 allowAdditions: true
             });
-            $('.brand.ui.dropdown').dropdown({
-                allowAdditions: true
-            });
-            $('.model.ui.dropdown').dropdown({
-                allowAdditions: true
-            });
-            $('.series.ui.dropdown').dropdown({
-                allowAdditions: true
+            $.fn.api.settings.api = {
+               'get models': '{{ route('api.carrental.model') }}?brand_id={id}',
+               'get series': '{{ route('api.carrental.series') }}?model_id={id}'
+            };
+            var brand = $('.brand.ui.dropdown').dropdown({
+                saveRemoteData: false,
+                onChange: function(value, text) {
+                    $('.model.ui.dropdown').dropdown('clear').dropdown({
+                        saveRemoteData: false,
+                        apiSettings: {
+                            action: 'get models',
+                            urlData: {_token: '{{ csrf_token() }}', id : value},
+                            cache: false
+                        },
+                        onChange: function(value, text) {
+                            $('.series.ui.dropdown').dropdown('clear').dropdown({
+                                saveRemoteData: false,
+                                apiSettings: {
+                                    action: 'get series',
+                                    urlData: {_token: '{{ csrf_token() }}', id : value},
+                                    cache: false
+                                }
+                            });
+                        }
+                    });
+                }
             });
             $('.semantic.ui.dropdown').dropdown({
                 allowAdditions: true

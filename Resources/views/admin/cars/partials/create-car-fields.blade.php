@@ -139,21 +139,21 @@
 
         {!! BSControlGroup::generate(
             BSForm::label('model_id', trans('carrental::carmodels.title.carmodels')),
-            BSForm::select('model_id', $modelLists, null, ['class'=>'model ui fluid search dropdown']),
+            BSForm::select('model_id', [], null, ['class'=>'model ui fluid search dropdown']),
             BSForm::help($errors->first('model_id')),
             4
         )->withAttributes(['class'=>$errors->has("model_id") ? ' has-error' : '']) !!}
 
         {!! BSControlGroup::generate(
             BSForm::label('series_id', trans('carrental::carseries.title.carseries')),
-            BSForm::select('series_id', $seriesLists, null, ['class'=>'series ui fluid search dropdown']),
+            BSForm::select('series_id', [], null, ['class'=>'series ui fluid search dropdown']),
             BSForm::help($errors->first('series_id')),
             4
         )->withAttributes(['class'=>$errors->has("series_id") ? ' has-error' : '']) !!}
 
         {!! BSControlGroup::generate(
             BSForm::label('fuel_type', trans('carrental::cars.form.fuel_type')),
-            BSForm::select('fuel_type', $fuels, null, ['class'=>'series ui fluid search dropdown']),
+            BSForm::select('fuel_type', $fuels, null, ['class'=>'semantic ui fluid search dropdown']),
             BSForm::help($errors->first('fuel_type')),
             4
         )->withAttributes(['class'=>$errors->has("fuel_type") ? ' has-error' : '']) !!}
