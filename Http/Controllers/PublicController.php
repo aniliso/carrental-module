@@ -41,7 +41,7 @@ class PublicController extends BasePublicController
 
         /* Start Default Breadcrumbs */
         Breadcrumbs::register('carrental.index', function($breadcrumbs) {
-            $breadcrumbs->push(trans('themes::carrental.rental cars'), route('carrental.index'));
+            $breadcrumbs->push(trans('themes::carrental.titles.rental cars'), route('carrental.index'));
         });
         /* End Default Breadcrumbs */
 
@@ -57,8 +57,8 @@ class PublicController extends BasePublicController
 
         $reservation = $request->session()->get('reservation');
 
-        $this->setTitle(trans('themes::carrental.rental cars'))
-            ->setDescription(trans('themes::carrental.seo description'));
+        $this->setTitle(trans('themes::carrental.titles.rental cars'))
+            ->setDescription(trans('themes::carrental.descriptions.index'));
 
         $this->setUrl(route('carrental.index'))
             ->addMeta('robots', "index, follow");
@@ -70,8 +70,8 @@ class PublicController extends BasePublicController
     {
         $cars = $this->car->all();
 
-        $this->setTitle("Kiralık Araç Fiyatları")
-            ->setDescription("Lüks, Standart, ekonomik araçlar için kiralık araç fiyat listesi");
+        $this->setTitle(trans('themes::carrental.titles.prices'))
+            ->setDescription(trans('themes::carrental.descriptions.prices'));
 
         $this->setUrl(route('carrental.prices'))
             ->addMeta('robots', "index, follow");
@@ -94,16 +94,16 @@ class PublicController extends BasePublicController
 
         $reservation = $request->session()->get('reservation');
 
-        $this->setTitle("Kiralık ".$car->fullname)
-            ->setDescription("Kiralık ".$car->fullname);
+        $this->setTitle(trans('themes::carrental.titles.car', ['car'=>$car->fullname]))
+            ->setDescription(trans('themes::carrental.descriptions.car', ['car'=>$car->fullname]));
 
         $this->setUrl(route('carrental.prices'))
             ->addMeta('robots', "index, follow");
 
         /* Start Default Breadcrumbs */
-        Breadcrumbs::register('carrental.reservation', function($breadcrumbs) {
+        Breadcrumbs::register('carrental.reservation', function($breadcrumbs) use($car) {
             $breadcrumbs->parent('carrental.index');
-            $breadcrumbs->push(trans('carrental::reservations.title.reservations'), route('carrental.reservation'));
+            $breadcrumbs->push(trans('carrental::carrental.titles.reservations', ['car'=>$car->fullname]), route('carrental.reservation'));
         });
         /* End Default Breadcrumbs */
 
