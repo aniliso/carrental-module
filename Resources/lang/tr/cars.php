@@ -67,7 +67,8 @@ return [
             'sedan'         => 'Sedan',
             'station_wagon' => 'Station Wagon',
             'suv'           => 'SUV/Jeep',
-            'minibus'       => 'Minibüs'
+            'minibus'       => 'Minibüs',
+			'van'			=> 'Van',
         ],
         'color'              => 'Renk',
         'colors'             => [

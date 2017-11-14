@@ -103,7 +103,7 @@ class PublicController extends BasePublicController
         /* Start Default Breadcrumbs */
         Breadcrumbs::register('carrental.reservation', function($breadcrumbs) use($car) {
             $breadcrumbs->parent('carrental.index');
-            $breadcrumbs->push(trans('carrental::carrental.titles.reservations', ['car'=>$car->fullname]), route('carrental.reservation'));
+            $breadcrumbs->push(trans('themes::carrental.titles.reservations', ['car'=>$car->fullname]), route('carrental.reservation'));
         });
         /* End Default Breadcrumbs */
 
