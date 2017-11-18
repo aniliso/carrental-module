@@ -66,7 +66,7 @@ class ReservationController extends AdminBaseController
      */
     public function edit(Reservation $reservation)
     {
-        return view('carrental::admin.reservations.edit', compact('reservation'));
+        return view('carrental::admin.reservations.detail', compact('reservation'));
     }
 
     /**

@@ -16,6 +16,9 @@
         .reservation td {
             padding: 5px;
         }
+        .reservation th {
+        	text-align: left;
+        }
     </style>
 </head>
 <body>
@@ -52,11 +55,11 @@
 		</tr>
         <tr>
             <th>Başlangıç Tarihi / Alış Lokasyonu</th>
-            <td>{{ $reservation->pick_at->formatLocalized('d F Y H:i') }} - {{ $reservation->present()->start_location }}</td>
+            <td>{{ $reservation->pick_at->formatLocalized('%d %B %Y %H:%M') }} - {{ $reservation->present()->start_location }}</td>
         </tr>
         <tr>
             <th>Dönüş Tarihi / Dönüş Lokasyonu</th>
-            <td>{{ $reservation->drop_at->formatLocalized('d F Y H:i') }} - {{ $reservation->present()->return_location }}</td>
+            <td>{{ $reservation->drop_at->formatLocalized('%d %B %Y %H:%M') }} - {{ $reservation->present()->return_location }}</td>
         </tr>
         <tr>
             <th>Toplam Gün / Fiyat</th>
