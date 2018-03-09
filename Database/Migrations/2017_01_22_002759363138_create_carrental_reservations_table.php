@@ -35,7 +35,7 @@ class CreateCarrentalReservationsTable extends Migration
             $table->dateTime('pick_at');
             $table->dateTime('drop_at');
 
-            $table->integer('total_days');
+            $table->integer('total_day');
             $table->decimal('daily_price', 8, 2);
 
             $table->timestamps();
