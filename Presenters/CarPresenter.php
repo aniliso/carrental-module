@@ -14,7 +14,7 @@ class CarPresenter extends Presenter
         if($file = $this->entity->files()->where('zone', 'carImages')->first()) {
             return \Imagy::getImage($file->filename, 'carImage', ['width' => $width, 'height' => $height, 'mode' => $mode, 'quality' => $quality]);
         }
-        return placeholdit($width ? $width : 200, $height ? $height : 230, 'Resim+Hazırlanıyor');
+        return placeholdit($width ? $width : 200, $height ? $height : 100, 'Resim+Hazırlanıyor');
     }
 
     public function images($width, $height, $mode, $quality, $image=4)
@@ -55,5 +55,46 @@ class CarPresenter extends Presenter
     public function daily_price()
     {
         return number_format($this->entity->daily_price, 2);
+    }
+
+    public function fullname()
+    {
+        return $this->entity->fullname.' '.$this->entity->series->name;
+    }
+
+    public function price()
+    {
+        $reservation = session()->get('reservation');
+        $day_range = $reservation->total_day;
+        switch($day_range) {
+            case $day_range <= 3:
+                $price = $this->entity->prices->price1;
+                break;
+            case $day_range <= 7:
+                $price = $this->entity->prices->price2;
+                break;
+            case $day_range <= 14:
+                $price = $this->entity->prices->price3;
+                break;
+            case $day_range <= 20:
+                $price = $this->entity->prices->price4;
+                break;
+            case $day_range <= 28:
+                $price = $this->entity->prices->price5;
+                break;
+            case $day_range > 28:
+                $price = $this->entity->prices->price6;
+                break;
+            default:
+                $price = $this->entity->prices->price1;
+        }
+        return $price;
+    }
+
+    public function total_price()
+    {
+        $reservation = session()->get('reservation');
+        $day_range = $reservation->total_day;
+        return number_format($this->price() * $day_range, 2).' TL';
     }
 }

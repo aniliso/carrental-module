@@ -50,6 +50,9 @@ class CarrentalServiceProvider extends ServiceProvider
             array_push($app, 'carrental');
             return $app;
         });
+
+        \Widget::register('carFindByOptions', '\Modules\Carrental\Widgets\CarWidget@findByOptions');
+        \Widget::register('carClasses', '\Modules\Carrental\Widgets\CarWidget@getClasses');
     }
 
     public function boot()

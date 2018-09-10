@@ -2,9 +2,8 @@
 
 namespace Modules\Carrental\Repositories\Eloquent;
 
-use Modules\Carrental\Entities\Car;
+use Illuminate\Database\Eloquent\Builder;
 use Modules\Carrental\Entities\Car\AvailableStatuses;
-use Modules\Carrental\Entities\Helpers\Status;
 use Modules\Carrental\Events\Car\CarWasCreated;
 use Modules\Carrental\Events\Car\CarWasDeleted;
 use Modules\Carrental\Events\Car\CarWasUpdated;
@@ -15,10 +14,7 @@ class EloquentCarRepository extends EloquentBaseRepository implements CarReposit
 {
     public function all()
     {
-        return $this->model->with('brand', 'model', 'carclass', 'series')
-            ->whereStatus(Status::PUBLISHED)
-            ->whereAvailableStatus(AvailableStatuses::READY)
-            ->get();
+        return $this->model->with('brand', 'model', 'carclass', 'series')->get();
     }
 
     public function create($data)
@@ -41,11 +37,30 @@ class EloquentCarRepository extends EloquentBaseRepository implements CarReposit
         return parent::destroy($model);
     }
 
-    public function allPaginate($per_page)
+    public function allPaginate($per_page, $status=1, $sort=[])
     {
-        return $this->model->with('brand', 'model', 'carclass', 'series')
-            ->whereStatus(Status::PUBLISHED)
-            ->whereAvailableStatus(AvailableStatuses::READY)
-            ->paginate($per_page);
+        $model = $this->model
+            ->select(['*'])
+            ->whereStatus($status)
+            ->whereAvailableStatus(AvailableStatuses::READY);
+
+        if(@$sort['category'])
+            $model->whereHas('carclass', function (Builder $q) use ($sort){
+               $q->where('id', $sort['category']);
+            });
+
+        if(is_array($sort) && @$sort['dir']) {
+            switch ($sort['sort']) {
+                case 'price':
+                    $model->leftJoin('car__prices as prices', 'id', '=', 'prices.car_id')
+                          ->orderBy('prices.price1', $sort['dir']);
+                    break;
+                case 'name':
+                    $model->orderBy('brand_id', $sort['dir']);
+                    break;
+            }
+        }
+
+        return $model->with(['brand', 'model', 'carclass', 'series', 'prices'])->paginate($per_page);
     }
 }

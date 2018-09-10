@@ -19,4 +19,5 @@ return [
         // Read module views from /resources/views/<module-name>
         'resources' => false,
     ],
+    'per_page' => 8
 ];

@@ -23,6 +23,7 @@
                 <ul class="nav nav-tabs">
                     <li class="active"><a href="#car" data-toggle="tab">{{ trans('carrental::cars.title.car') }}</a></li>
                     <li><a href="#images" data-toggle="tab">{{ trans('carrental::cars.title.images') }}</a></li>
+                    <li><a href="#settings" data-toggle="tab">{{ trans('carrental::cars.title.settings') }}</a></li>
                     <li><a href="#prices" data-toggle="tab">{{ trans('carrental::cars.title.prices') }}</a></li>
                 </ul>
                 <div class="tab-content">
@@ -30,9 +31,14 @@
                         @include('carrental::admin.cars.partials.edit-car-fields')
                     </div>
                     <div class="tab-pane" id="images">
-                        <div class="form-group">
-                            @mediaMultiple('carImages', $car, null, trans('carrental::cars.title.images'))
+                        <div class="box-body">
+                            <div class="form-group">
+                                @mediaMultiple('carImages', $car, null, trans('carrental::cars.title.images'))
+                            </div>
                         </div>
+                    </div>
+                    <div class="tab-pane" id="settings">
+                        @include('carrental::admin.cars.partials.settings')
                     </div>
                     <div class="tab-pane" id="prices">
                         <table class="table table-bordered">

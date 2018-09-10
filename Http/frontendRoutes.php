@@ -14,6 +14,16 @@ $router->group([], function (Router $router) {
         'as'   => 'carrental.index'
     ]);
 
+    $router->post(LaravelLocalization::transRoute('carrental::routes.cars'), [
+        'uses' => 'PublicController@index',
+        'as'   => 'carrental.index.update'
+    ]);
+
+    $router->get(LaravelLocalization::transRoute('carrental::routes.car'), [
+        'uses' => 'PublicController@car',
+        'as'   => 'carrental.car'
+    ]);
+
     $router->get(LaravelLocalization::transRoute('carrental::routes.prices'), [
         'uses' => 'PublicController@prices',
         'as'   => 'carrental.prices'

@@ -8,9 +8,17 @@
     "order": 120,
     "providers": [
         "Modules\\Carrental\\Providers\\CarrentalServiceProvider",
-        "Modules\\Carrental\\Providers\\RouteServiceProvider"
+        "Modules\\Carrental\\Providers\\RouteServiceProvider",
+        "Bootstrapper\\BootstrapperL5ServiceProvider"
     ],
-    "aliases": [],
+    "aliases": {
+        "BSLabel": "Bootstrapper\\Facades\\Label",
+        "BSForm": "Bootstrapper\\Facades\\Form",
+        "BSHelp": "Bootstrapper\\Facades\\Helpers",
+        "BSControlGroup": "Bootstrapper\\Facades\\ControlGroup",
+        "BSInputGroup": "Bootstrapper\\Facades\\InputGroup",
+        "BSTable": "Bootstrapper\\Facades\\Table"
+    },
     "files": [],
     "requires": []
 }

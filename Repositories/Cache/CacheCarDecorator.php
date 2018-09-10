@@ -15,14 +15,15 @@ class CacheCarDecorator extends BaseCacheDecorator implements CarRepository
         $this->repository = $car;
     }
 
-    public function allPaginate($per_page)
+    public function allPaginate($per_page, $status=1, $sort=[])
     {
         $page = \Request::has('page') ? \Request::query('page') : 1;
+        $sort_cache = implode(',', $sort);
         return $this->cache
             ->tags($this->entityName, 'global')
-            ->remember("{$this->locale}.{$this->entityName}.allPaginate.{$per_page}.{$page}", $this->cacheTime,
-                function () use ($per_page) {
-                    return $this->repository->allPaginate($per_page);
+            ->remember("{$this->locale}.{$this->entityName}.allPaginate.{$per_page}.{$page}.{$status}.{$sort_cache}", $this->cacheTime,
+                function () use ($per_page, $status, $sort) {
+                    return $this->repository->allPaginate($per_page, $status, $sort);
                 }
             );
     }

@@ -23,15 +23,21 @@
                 <ul class="nav nav-tabs">
                     <li class="active"><a href="#car" data-toggle="tab">{{ trans('carrental::cars.title.car') }}</a></li>
                     <li><a href="#images" data-toggle="tab">{{ trans('carrental::cars.title.images') }}</a></li>
+                    <li><a href="#settings" data-toggle="tab">{{ trans('carrental::cars.title.settings') }}</a></li>
                 </ul>
                 <div class="tab-content">
                     <div class="tab-pane active" id="car">
                         @include('carrental::admin.cars.partials.create-car-fields')
                     </div>
                     <div class="tab-pane" id="images">
-                        <div class="form-group">
-                        @mediaMultiple('carImages', null, null, trans('carrental::cars.title.images'))
+                        <div class="box-body">
+                            <div class="form-group">
+                                @mediaMultiple('carImages', null, null, trans('carrental::cars.title.images'))
+                            </div>
                         </div>
+                    </div>
+                    <div class="tab-pane" id="settings">
+                        @include('carrental::admin.cars.partials.settings')
                     </div>
 
                     <div class="box-footer">
@@ -76,8 +82,8 @@
                 allowAdditions: true
             });
             $.fn.api.settings.api = {
-               'get models': '{{ route('api.carrental.model') }}?brand_id={id}',
-               'get series': '{{ route('api.carrental.series') }}?model_id={id}'
+               'get models': '{{ route('api.carrental.model') }}?brand_id='+"{id}",
+               'get series': '{{ route('api.carrental.series') }}?model_id='+"{id}"
             };
             var brand = $('.brand.ui.dropdown').dropdown({
                 saveRemoteData: false,

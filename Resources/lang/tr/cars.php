@@ -12,7 +12,8 @@ return [
         'create car' => 'Araç Ekle',
         'edit car'   => 'Araç Düzenle',
         'images'     => 'Resimler',
-        'prices'     => 'Fiyat Listesi'
+        'prices'     => 'Fiyat Listesi',
+        'settings'   => 'Ayarlar'
     ],
     'button'           => [
         'create car' => 'Araç Ekle',
@@ -60,15 +61,15 @@ return [
         ],
         'body_type'          => 'Kasa',
         'body_types'         => [
-            'cabrio'        => 'Cabrio',
-            'coupe'         => 'Coupe',
-            'hatchback_3'   => 'Hatchback 3 Kapı',
-            'hatchback_5'   => 'Hatchback 5 Kapı',
-            'sedan'         => 'Sedan',
-            'station_wagon' => 'Station Wagon',
-            'suv'           => 'SUV/Jeep',
-            'minibus'       => 'Minibüs',
-			'van'			=> 'Van',
+            'cabrio'        => '2',
+            'coupe'         => '2',
+            'hatchback_3'   => '3',
+            'hatchback_5'   => '5',
+            'sedan'         => '4',
+            'station_wagon' => '5',
+            'suv'           => '5',
+            'minibus'       => '3',
+			'van'			=> '3',
         ],
         'color'              => 'Renk',
         'colors'             => [

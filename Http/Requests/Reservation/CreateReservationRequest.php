@@ -14,12 +14,12 @@ class CreateReservationRequest extends BaseFormRequest
     public function rules()
     {
         return [
-            'tc_no' => 'required',
-            'first_name' => 'required',
-            'last_name' => 'required',
-            'mobile_phone' => 'required',
-            'email' => 'required|email',
-			'g-recaptcha-response' => 'required|captcha'
+            'tc_no'                => 'required',
+            'first_name'           => 'required',
+            'last_name'            => 'required',
+            'mobile_phone'         => 'required',
+            'email'                => 'required|email',
+            'g-recaptcha-response' => 'required|captcha'
         ];
     }
 

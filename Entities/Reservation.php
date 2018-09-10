@@ -40,12 +40,12 @@ class Reservation extends Model
 
     public function Pickup()
     {
-        return $this->hasOne(Location::class, 'start_location');
+        return $this->hasOne(Location::class, 'id', 'start_location');
     }
 
-    public function DropOff()
+    public function Return()
     {
-        return $this->hasOne(Location::class, 'return_location');
+        return $this->hasOne(Location::class, 'id', 'return_location');
     }
 
     public function getFullNameAttribute()

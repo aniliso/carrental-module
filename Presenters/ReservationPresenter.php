@@ -17,11 +17,11 @@ class ReservationPresenter extends Presenter
 
     public function start_location()
     {
-        return app(LocationRepository::class)->find($this->entity->start_location)->name;
+        return app(LocationRepository::class)->find($this->entity->start_location)->name ?? null;
     }
 
     public function return_location()
     {
-        return app(LocationRepository::class)->find($this->entity->return_location)->name;
+        return app(LocationRepository::class)->find($this->entity->return_location)->name ?? null;
     }
 }

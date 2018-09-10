@@ -6,12 +6,11 @@ use Breadcrumbs;
 use Illuminate\Foundation\Application;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use Modules\Carrental\Entities\Car;
-use Modules\Carrental\Entities\Reservation;
 use Modules\Carrental\Http\Requests\Reservation\CreateReservationRequest;
 use Modules\Carrental\Mail\ReservationCreated;
 use Modules\Carrental\Repositories\CarRepository;
 use Modules\Carrental\Repositories\ReservationRepository;
+use Modules\Carrental\Services\ReservationSession;
 use Modules\Core\Http\Controllers\BasePublicController;
 
 class PublicController extends BasePublicController
@@ -28,23 +27,27 @@ class PublicController extends BasePublicController
      * @var ReservationRepository
      */
     private $reservation;
+    /**
+     * @var ReservationSession
+     */
+    private $session;
 
     /**
      * PublicController constructor.
      */
-    public function __construct(CarRepository $car, Application $app, ReservationRepository $reservation)
+    public function __construct(CarRepository $car, Application $app, ReservationRepository $reservation, ReservationSession $session)
     {
         parent::__construct();
         $this->car = $car;
         $this->reservation = $reservation;
         $this->app = $app;
+        $this->session = $session;
 
         /* Start Default Breadcrumbs */
         Breadcrumbs::register('carrental.index', function($breadcrumbs) {
             $breadcrumbs->push(trans('themes::carrental.titles.rental cars'), route('carrental.index'));
         });
         /* End Default Breadcrumbs */
-
     }
 
     /**
@@ -53,9 +56,17 @@ class PublicController extends BasePublicController
      */
     public function index(Request $request)
     {
-        $cars = $this->car->allPaginate(5);
+        if($request->has('pick_at')) {
+            $this->session->update($request);
+        }
 
-        $reservation = $request->session()->get('reservation');
+        $sort['sort'] = $request->get('sort');
+        $sort['dir']  = $request->get('dir');
+        $sort['category'] = $request->get('category');
+
+        $cars = $this->car->allPaginate(config('asgard.carrental.config.per_page'), 1, $sort);
+
+        $reservation = $this->session->getSession();
 
         $this->setTitle(trans('themes::carrental.titles.rental cars'))
             ->setDescription(trans('themes::carrental.descriptions.index'));
@@ -64,6 +75,27 @@ class PublicController extends BasePublicController
             ->addMeta('robots', "index, follow");
 
         return view('carrental::index', compact('cars', 'reservation'));
+    }
+
+    public function car($slug, $id)
+    {
+        $car = $this->car->find($id);
+        if(!isset($car)) abort(404);
+
+        $reservation = $this->session->getSession();
+
+        $this->setTitle(trans('themes::carrental.titles.car', ['car'=>$car->fullname]))
+             ->setDescription(trans('themes::carrental.titles.car', ['car'=>$car->fullname]));
+
+        $this->setUrl($car->url)
+             ->addMeta('robots', 'index, follow');
+
+        Breadcrumbs::register('carrental.car', function ($breadcrumbs) use ($car) {
+           $breadcrumbs->parent('carrental.index');
+           $breadcrumbs->push(trans('themes::carrental.titles.car', ['car'=>$car->fullname]), $car->url);
+        });
+
+        return view('carrental::car', compact('car', 'reservation'));
     }
 
     public function prices()
@@ -88,11 +120,15 @@ class PublicController extends BasePublicController
 
     public function reservation(Request $request)
     {
-        $car = $this->car->find($request->car_id);
+        $reservation = $this->session->getSession();
 
-        if(!isset($car)) return redirect()->route('carrental.index');
+        if(!$request->session()->has('reservation') && !isset($reservation->car_id))
+            return redirect()->route('homepage');
 
-        $reservation = $request->session()->get('reservation');
+        $car = $this->car->find($reservation->car_id);
+
+        if($reservation->total_day <= 0)
+            return redirect()->back()->withErrors('En az 1 gün kiralama yapmalısınız!');
 
         $this->setTitle(trans('themes::carrental.titles.car', ['car'=>$car->fullname]))
             ->setDescription(trans('themes::carrental.descriptions.car', ['car'=>$car->fullname]));
@@ -103,7 +139,8 @@ class PublicController extends BasePublicController
         /* Start Default Breadcrumbs */
         Breadcrumbs::register('carrental.reservation', function($breadcrumbs) use($car) {
             $breadcrumbs->parent('carrental.index');
-            $breadcrumbs->push(trans('themes::carrental.titles.reservations', ['car'=>$car->fullname]), route('carrental.reservation'));
+            $breadcrumbs->push($car->fullname, $car->url);
+            $breadcrumbs->push(trans('themes::carrental.titles.reservation'));
         });
         /* End Default Breadcrumbs */
 
@@ -112,50 +149,18 @@ class PublicController extends BasePublicController
 
     public function updateReservation(Request $request)
     {
-        $this->reservationUpdate($request);
-        return redirect()->route('carrental.reservation', ['car_id'=>$request->car_id]);
+        $this->session->update($request);
+        return redirect()->route('carrental.reservation');
     }
 
     public function createReservation(CreateReservationRequest $request)
     {
-        $reservation = $this->reservationUpdate($request);
+        $reservation = $this->session->create($request);
         if($reservation = $this->reservation->create($reservation->toArray()))
         {
             \Mail::to(setting('theme::email'))->send(new ReservationCreated($reservation));
         }
-        return redirect()->route('carrental.reservation', ['car_id'=>$request->car_id])
+        return redirect()->route('carrental.reservation')
                          ->withSuccess(trans('carrental::reservations.messages.reservation created'));
-    }
-
-    private function reservationUpdate(Request $request)
-    {
-        if($request->session()->has('reservation'))
-        {
-            $reservation = $request->session()->get('reservation');
-            $reservation->car_id = $request->has('car_id') ? $request->car_id : $reservation->car_id;
-            $reservation->pick_at = $request->has('pick_at') ? \Carbon::parse($request['pick_at'].$request['pick_hour']) : $reservation->pick_at;
-            $reservation->drop_at = $request->has('drop_at') ? \Carbon::parse($request['drop_at'].$request['drop_hour']) : $reservation->drop_at;
-            $reservation->start_location = $request->has('start_location') ? $request->start_location : $reservation->start_location;
-            $reservation->return_location = $request->has('return_location') ? $request->return_location : $reservation->return_location;
-            $reservation->total_day = ceil($reservation->drop_at->diffInHours($reservation->pick_at)/24);
-            if($car = $this->car->find($request->car_id)) {
-                $reservation->daily_price = app(Car::class)->findPriceForDay($car, $reservation->total_day);
-            }
-            $reservation->tc_no = $request->tc_no;
-            $reservation->first_name = $request->first_name;
-            $reservation->last_name = $request->last_name;
-            $reservation->phone = $request->phone;
-            $reservation->mobile_phone = $request->mobile_phone;
-            $reservation->email = $request->email;
-            $reservation->requests = $request->requests;
-            $request->session()->put('reservation', $reservation);
-        } else {
-            $request['pick_at'] = \Carbon::parse($request['pick_at'].$request['pick_hour']);
-            $request['drop_at'] = \Carbon::parse($request['drop_at'].$request['drop_hour']);
-            $input = $request->except(['pick_hour', 'drop_hour', '_method', '_token']);
-            $reservation = new Reservation($input);
-            $request->session()->put('reservation', $reservation);
-        }
-        return $request->session()->get('reservation');
     }
 }

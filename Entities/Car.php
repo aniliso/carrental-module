@@ -37,6 +37,7 @@ class Car extends Model
         'description',
         'available_status',
         'status',
+        'settings'
     ];
 
     protected $dates = ['licensed_at'];
@@ -65,7 +66,7 @@ class Car extends Model
 
     public function CarClass()
     {
-        return $this->belongsTo(CarClass::class, 'class_id');
+        return $this->belongsTo(CarClass::class, 'class_id')->with('translations');
     }
 
     public function getImagesAttribute()
@@ -90,7 +91,7 @@ class Car extends Model
 
     public function getFullNameAttribute()
     {
-        return $this->brand->name . ' ' . $this->model->name . ' ' . $this->series->name;
+        return $this->brand->name . ' ' . $this->model->name;
     }
 
     public function findPriceForDay(Car $car, $day_range) {
@@ -117,5 +118,36 @@ class Car extends Model
                 $price = $car->prices->price1;
         }
         return $price;
+    }
+
+    public function setSettingsAttribute($value)
+    {
+        return $this->attributes['settings'] = json_encode($value);
+    }
+
+    public function getSettingsAttribute()
+    {
+        $settings = json_decode($this->attributes['settings']);
+        return $settings;
+    }
+
+    public function scopeStatus()
+    {
+        return $this->whereStatus(Status::PUBLISHED);
+    }
+
+    public function scopeAvailableStatus()
+    {
+        return $this->whereAvailableStatus(AvailableStatuses::READY);
+    }
+
+    public function getReservationUrlAttribute()
+    {
+        return route('carrental.reservation');
+    }
+
+    public function getUrlAttribute()
+    {
+        return route('carrental.car', [str_slug($this->brand->name.' '.$this->model->name.' '.$this->series->name, '-'), $this->id]);
     }
 }

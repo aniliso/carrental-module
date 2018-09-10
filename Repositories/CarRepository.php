@@ -6,5 +6,5 @@ use Modules\Core\Repositories\BaseRepository;
 
 interface CarRepository extends BaseRepository
 {
-    public function allPaginate($per_page);
+    public function allPaginate($per_page, $status=1, $sort=[]);
 }
