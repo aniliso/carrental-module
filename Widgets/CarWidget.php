@@ -1,6 +1,7 @@
 <?php namespace Modules\Carrental\Widgets;
 
 
+use Modules\Carrental\Repositories\CarBrandRepository;
 use Modules\Carrental\Repositories\CarClassRepository;
 use Modules\Carrental\Repositories\CarRepository;
 
@@ -14,11 +15,16 @@ class CarWidget
      * @var CarClassRepository
      */
     private $carClass;
+    /**
+     * @var CarBrandRepository
+     */
+    private $carBrands;
 
-    public function __construct(CarRepository $car, CarClassRepository $carClass)
+    public function __construct(CarRepository $car, CarClassRepository $carClass, CarBrandRepository $carBrands)
     {
         $this->car = $car;
         $this->carClass = $carClass;
+        $this->carBrands = $carBrands;
     }
 
     public function findByOptions($option='', $view='option')
@@ -31,5 +37,11 @@ class CarWidget
     {
         $classes = $this->carClass->all();
         return view('carrental::widgets.'.$view, compact('classes'));
+    }
+
+    public function getBrands($view='brands')
+    {
+        $brands = $this->carBrands->all();
+        return view('carrental::widgets.'.$view, compact('brands'));
     }
 }

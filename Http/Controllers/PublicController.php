@@ -63,6 +63,7 @@ class PublicController extends BasePublicController
         $sort['sort'] = $request->get('sort');
         $sort['dir']  = $request->get('dir');
         $sort['category'] = $request->get('category');
+        $sort['brand'] = $request->get('brand');
 
         $cars = $this->car->allPaginate(config('asgard.carrental.config.per_page'), 1, $sort);
 

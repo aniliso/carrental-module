@@ -65,7 +65,7 @@ class CarPresenter extends Presenter
     public function price()
     {
         $reservation = session()->get('reservation');
-        $day_range = $reservation->total_day;
+        $day_range = $reservation->total_day ?? 1;
         switch($day_range) {
             case $day_range <= 3:
                 $price = $this->entity->prices->price1;

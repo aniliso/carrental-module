@@ -49,6 +49,11 @@ class EloquentCarRepository extends EloquentBaseRepository implements CarReposit
                $q->where('id', $sort['category']);
             });
 
+        if(@$sort['brand'])
+            $model->whereHas('brand', function (Builder $q) use ($sort){
+                $q->where('id', $sort['brand']);
+            });
+
         if(is_array($sort) && @$sort['dir']) {
             switch ($sort['sort']) {
                 case 'price':

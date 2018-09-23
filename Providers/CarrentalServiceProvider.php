@@ -53,6 +53,7 @@ class CarrentalServiceProvider extends ServiceProvider
 
         \Widget::register('carFindByOptions', '\Modules\Carrental\Widgets\CarWidget@findByOptions');
         \Widget::register('carClasses', '\Modules\Carrental\Widgets\CarWidget@getClasses');
+        \Widget::register('carBrands', '\Modules\Carrental\Widgets\CarWidget@getBrands');
     }
 
     public function boot()

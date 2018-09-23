@@ -2,7 +2,7 @@
 
 return [
   'cars'        => 'kiralik-araclar',
-  'car'         => '{slug}/{id}',
+  'car'         => 'kiralik_{slug}_{id}',
   'prices'      => 'arac-fiyatlari',
   'reservation' => 'rezervasyon'
 ];
