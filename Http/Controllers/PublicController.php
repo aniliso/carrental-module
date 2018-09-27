@@ -131,7 +131,7 @@ class PublicController extends BasePublicController
         if($reservation->total_day <= 0)
             return redirect()->back()->withErrors('En az 1 gün kiralama yapmalısınız!');
 
-        $this->setTitle(trans('themes::carrental.titles.car', ['car'=>$car->fullname]))
+        $this->setTitle(trans('themes::carrental.titles.reservation car', ['car'=>$car->fullname]))
             ->setDescription(trans('themes::carrental.descriptions.car', ['car'=>$car->fullname]));
 
         $this->setUrl(route('carrental.prices'))
@@ -141,7 +141,7 @@ class PublicController extends BasePublicController
         Breadcrumbs::register('carrental.reservation', function($breadcrumbs) use($car) {
             $breadcrumbs->parent('carrental.index');
             $breadcrumbs->push($car->fullname, $car->url);
-            $breadcrumbs->push(trans('themes::carrental.titles.reservation'));
+            $breadcrumbs->push(trans('themes::carrental.titles.reservation car', ['car'=>$car->fullname]));
         });
         /* End Default Breadcrumbs */
 
