@@ -157,6 +157,7 @@ class PublicController extends BasePublicController
     public function createReservation(CreateReservationRequest $request)
     {
         $reservation = $this->session->create($request);
+
         if($reservation = $this->reservation->create($reservation->toArray()))
         {
             \Mail::to(setting('theme::email'))->send(new ReservationCreated($reservation));

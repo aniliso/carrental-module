@@ -51,15 +51,15 @@ class ReservationSession
     {
         $this->reservation = $this->hasSession() ? $this->getSession() : new Reservation();
 
-        if(!$request->has('pick_at') && !$request->has('drop_at')) {
+        if(!$this->reservation->pick_at && !$this->reservation->drop_at) {
             $this->reservation->pick_at = Carbon::now()->hour(9)->minute(0);
             $this->reservation->drop_at = Carbon::now()->addDay(1)->hour(9)->minute(0);
         }
 
         //Reservation Date
         $this->reservation->car_id          = $request->has('car_id') ? $request->car_id : $this->reservation->car_id;
-        $this->reservation->pick_at         = $request->has('pick_at') ? Carbon::parse($request['pick_at'].' '.$request['pick_hour']) : $this->reservation->pick_at;
-        $this->reservation->drop_at         = $request->has('drop_at') ? Carbon::parse($request['drop_at'].' '.$request['drop_hour']) : $this->reservation->drop_at;
+        $this->reservation->pick_at         = $request->has('pick_at') ? Carbon::parse($request['pick_at'].' '.$request['pick_hour']) : Carbon::parse($this->reservation->pick_at);
+        $this->reservation->drop_at         = $request->has('drop_at') ? Carbon::parse($request['drop_at'].' '.$request['drop_hour']) : Carbon::parse($this->reservation->drop_at);
         $this->reservation->start_location  = $request->has('start_location') ? $request->start_location : $this->reservation->start_location;
         $this->reservation->return_location = $request->has('return_location') ? $request->return_location : $this->reservation->return_location;
 
