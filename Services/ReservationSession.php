@@ -66,6 +66,11 @@ class ReservationSession
         //Reservation Details
         $this->reservation->total_day       = ceil($this->reservation->drop_at->diffInHours($this->reservation->pick_at)/24);
 
+        if($car = $this->car->find($request->car_id)) {
+            $this->reservation->daily_price = $this->car->findPriceForDay($car, $this->reservation->total_day);
+            $this->reservation->total_price = $this->reservation->daily_price * $this->reservation->total_day;
+        }
+
         //Reservation Info
         $this->reservation->tc_no           = $request->tc_no;
         $this->reservation->first_name      = $request->first_name;
