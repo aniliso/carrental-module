@@ -35,6 +35,7 @@
                             <th>{{ trans('carrental::cars.form.brand_id') }}</th>
                             <th>{{ trans('carrental::cars.form.model_id') }}</th>
                             <th>{{ trans('carrental::cars.form.series_id') }}</th>
+                            <th>{{ trans('carrental::cars.form.body_type') }}</th>
                             <th>{{ trans('carrental::cars.form.color') }}</th>
                             <th>{{ trans('carrental::cars.form.fuel_type') }}</th>
                             <th>{{ trans('carrental::cars.form.transmission') }}</th>
@@ -69,7 +70,12 @@
                             </td>
                             <td>
                                 <a href="{{ route('admin.carrental.car.edit', [$car->id]) }}">
-                                    {{ $car->series->name }}
+                                    {{ $car->series->name ?? null }}
+                                </a>
+                            </td>
+                            <td>
+                                <a href="{{ route('admin.carrental.car.edit', [$car->id]) }}">
+                                    {{ $car->present()->body_type(false) }}
                                 </a>
                             </td>
                             <td>

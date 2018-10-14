@@ -37,9 +37,9 @@ class CarPresenter extends Presenter
         return isset($this->entity->transmission) ? \CarTransmission::get($this->entity->transmission) : null;
     }
 
-    public function body_type()
+    public function body_type($front=true)
     {
-        return isset($this->entity->body_type) ? \CarBodyType::get($this->entity->body_type) : null;
+        return isset($this->entity->body_type) ? \CarBodyType::get($this->entity->body_type, $front) : null;
     }
 
     public function color()

@@ -35,7 +35,7 @@
                         @foreach($cars as $car)
                         <tr>
                             <td style="width: 10px">{{ $car->id }}</td>
-                            <td>{{ $car->fullname }}</td>
+                            <td>{{ $car->present()->fullname }} ({{ $car->present()->transmission }})</td>
                             <td>{!! BSForm::text("{$car->id}[price1]", old("{$car->id}[price1]", $car->prices->price1)) !!}</td>
                             <td>{!! BSForm::text("{$car->id}[price2]", old("{$car->id}[price2]", $car->prices->price2)) !!}</td>
                             <td>{!! BSForm::text("{$car->id}[price3]", old("{$car->id}[price3]", $car->prices->price3)) !!}</td>

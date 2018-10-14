@@ -77,6 +77,7 @@ class CarController extends AdminBaseController
     public function prices()
     {
         $cars = $this->car->all();
+        $cars = $cars->sortBy('brand.name');
         foreach ($cars as $car){
             if(!count($car->prices)) {
                 $car->prices()->save(new CarPrice());
@@ -133,7 +134,7 @@ class CarController extends AdminBaseController
             $car->model()->associate($model);
             $car->save();
         }
-        if($series = $this->carmodel->find($request->series_id)) {
+        if($series = $this->carseries->find($request->series_id)) {
             $car->series()->associate($series);
             $car->save();
         }
@@ -177,7 +178,7 @@ class CarController extends AdminBaseController
         if($model = $this->carmodel->find($request->model_id)) {
             $car->model()->associate($model);
         }
-        if($series = $this->carmodel->find($request->series_id)) {
+        if($series = $this->carseries->find($request->series_id)) {
             $car->series()->associate($series);
         }
 

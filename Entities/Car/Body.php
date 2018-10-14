@@ -11,20 +11,22 @@ class Body
     const STATION_WAGON = 6;
     const SUV = 7;
     const VAN = 8;
+    const MINIBUS = 9;
 
     private $bodies = [];
 
     public function __construct()
     {
         $this->bodies = [
-          self::CABRIO => trans('carrental::cars.form.body_types.cabrio'),
-          self::COUPE => trans('carrental::cars.form.body_types.coupe'),
-          self::HATCHBACK_3 => trans('carrental::cars.form.body_types.hatchback_3'),
-          self::HATCHBACK_5 => trans('carrental::cars.form.body_types.hatchback_5'),
-          self::SEDAN => trans('carrental::cars.form.body_types.sedan'),
-          self::STATION_WAGON => trans('carrental::cars.form.body_types.station_wagon'),
-          self::SUV => trans('carrental::cars.form.body_types.suv'),
-          self::VAN => trans('carrental::cars.form.body_types.van')
+            self::CABRIO => trans('carrental::cars.form.body_types.cabrio'),
+            self::COUPE => trans('carrental::cars.form.body_types.coupe'),
+            self::HATCHBACK_3 => trans('carrental::cars.form.body_types.hatchback_3'),
+            self::HATCHBACK_5 => trans('carrental::cars.form.body_types.hatchback_5'),
+            self::SEDAN => trans('carrental::cars.form.body_types.sedan'),
+            self::STATION_WAGON => trans('carrental::cars.form.body_types.station_wagon'),
+            self::SUV => trans('carrental::cars.form.body_types.suv'),
+            self::VAN => trans('carrental::cars.form.body_types.van'),
+            self::MINIBUS => trans('carrental::cars.form.body_types.minibus')
         ];
     }
 
@@ -39,6 +41,6 @@ class Body
         {
             return $this->bodies[$bodyId];
         }
-        return $this->bodies[self::CABRIO];
+        return $this->bodies[self::SEDAN];
     }
 }

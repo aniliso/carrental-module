@@ -61,6 +61,9 @@
                 checkboxClass: 'icheckbox_flat-blue',
                 radioClass: 'iradio_flat-blue'
             });
+            $('.series.ui.dropdown').dropdown({
+                allowAdditions: true
+            });
         });
     </script>
 @stop
