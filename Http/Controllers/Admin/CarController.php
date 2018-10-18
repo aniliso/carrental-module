@@ -79,7 +79,7 @@ class CarController extends AdminBaseController
         $cars = $this->car->all();
         $cars = $cars->sortBy('brand.name');
         foreach ($cars as $car){
-            if(!count($car->prices)) {
+            if($car->prices()->count()==0) {
                 $car->prices()->save(new CarPrice());
             }
         }
@@ -91,12 +91,12 @@ class CarController extends AdminBaseController
         $inputs = $request->except(['_token']);
         foreach ($inputs as $key => $prices) {
             if($car = $this->car->find($key)) {
-               if(!count($car->prices)) {
-                   $prices = new CarPrice($prices);
-                   $car->prices()->save($prices);
-               } else {
-                   $car->prices()->update($prices);
-               }
+                if($car->prices()->count()==0) {
+                    $prices = new CarPrice($prices);
+                    $car->prices()->save($prices);
+                } else {
+                    $car->prices()->update($prices);
+                }
             }
         }
         return redirect()->route('admin.carrental.car.prices')
@@ -138,7 +138,7 @@ class CarController extends AdminBaseController
             $car->series()->associate($series);
             $car->save();
         }
-        if(!count($car->prices)) {
+        if($car->prices()->count()==0) {
             $price = new CarPrice();
             $car->prices()->save($price);
         }
@@ -183,7 +183,7 @@ class CarController extends AdminBaseController
         }
 
         $prices = new CarPrice($request->get('prices'));
-        if(!count($car->prices)) {
+        if($car->prices()->count()==0) {
             $car->prices()->save($prices);
         } else {
             $car->prices()->update($prices->toArray());
