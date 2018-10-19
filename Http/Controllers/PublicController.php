@@ -8,6 +8,8 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Modules\Carrental\Http\Requests\Reservation\CreateReservationRequest;
 use Modules\Carrental\Mail\ReservationCreated;
+use Modules\Carrental\Repositories\CarBrandRepository;
+use Modules\Carrental\Repositories\CarClassRepository;
 use Modules\Carrental\Repositories\CarRepository;
 use Modules\Carrental\Repositories\ReservationRepository;
 use Modules\Carrental\Services\ReservationSession;
@@ -31,23 +33,41 @@ class PublicController extends BasePublicController
      * @var ReservationSession
      */
     private $session;
+    /**
+     * @var CarClassRepository
+     */
+    private $class;
+    /**
+     * @var CarBrandRepository
+     */
+    private $brand;
 
     /**
      * PublicController constructor.
      */
-    public function __construct(CarRepository $car, Application $app, ReservationRepository $reservation, ReservationSession $session)
+    public function __construct(
+        CarRepository $car,
+        Application $app,
+        ReservationRepository $reservation,
+        ReservationSession $session,
+        CarClassRepository $class,
+        CarBrandRepository $brand
+    )
     {
         parent::__construct();
         $this->car = $car;
         $this->reservation = $reservation;
         $this->app = $app;
         $this->session = $session;
+        $this->class = $class;
+        $this->brand = $brand;
 
         /* Start Default Breadcrumbs */
         Breadcrumbs::register('carrental.index', function($breadcrumbs) {
             $breadcrumbs->push(trans('themes::carrental.titles.rental cars'), route('carrental.index'));
         });
         /* End Default Breadcrumbs */
+
     }
 
     /**
@@ -60,22 +80,36 @@ class PublicController extends BasePublicController
             $this->session->update($request);
         }
 
-        $sort['sort'] = $request->get('sort');
-        $sort['dir']  = $request->get('dir');
+        $sort['sort']     = $request->get('sort');
+        $sort['dir']      = $request->get('dir');
         $sort['category'] = $request->get('category');
-        $sort['brand'] = $request->get('brand');
+        $sort['brand']    = $request->get('brand');
+
+        $class = $this->class->find($sort['category']);
+        $brand = $this->brand->find($sort['brand']);
+
+        $title = trans('themes::carrental.titles.rental cars');
+        if($sort['category'] ||$sort['brand'])
+            $title = trans('themes::carrental.titles.sort', ['class'=>$class->name ?? 'Sınıf', 'brand'=>$brand->name ?? 'Marka']);
+
 
         $cars = $this->car->allPaginate(config('asgard.carrental.config.per_page'), 1, $sort);
 
         $reservation = $this->session->getSession();
 
-        $this->setTitle(trans('themes::carrental.titles.rental cars'))
+        $this->setTitle($title)
             ->setDescription(trans('themes::carrental.descriptions.index'));
 
         $this->setUrl(route('carrental.index'))
             ->addMeta('robots', "index, follow");
 
-        return view('carrental::index', compact('cars', 'reservation'));
+        /* Start Default Breadcrumbs */
+        Breadcrumbs::register('carrental.sort', function($breadcrumbs) use ($title) {
+            $breadcrumbs->push($title, route('carrental.index'));
+        });
+        /* End Default Breadcrumbs */
+
+        return view('carrental::index', compact('cars', 'reservation', 'title'));
     }
 
     public function car($slug, $id)
