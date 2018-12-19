@@ -120,7 +120,7 @@ class PublicController extends BasePublicController
         $reservation = $this->session->getSession();
 
         $this->setTitle(trans('themes::carrental.titles.car', ['car'=>$car->fullname]))
-             ->setDescription(trans('themes::carrental.titles.car', ['car'=>$car->fullname]));
+             ->setDescription(trans('themes::carrental.descriptions.car', ['car'=>$car->fullname]));
 
         $this->setUrl($car->url)
              ->addMeta('robots', 'index, follow');
