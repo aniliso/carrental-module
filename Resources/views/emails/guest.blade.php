@@ -1,7 +1,7 @@
 @component('mail::message')
 
 @component('mail::promotion')
-{{ $reservation->id }} No.lu Rezervasyon Bilgileri
+{{ $reservation->id }} No.lu Rezervasyon
 @endcomponent
 
 @component('mail::table')
@@ -18,6 +18,10 @@
 | Dönüş Tarihi / Dönüş Lokasyonu | {{ $reservation->drop_at->formatLocalized('%d %B %Y %H:%M') }} - {{ $reservation->present()->return_location }} |
 | Toplam Gün / Fiyat | {{ $reservation->total_day }} Gün - {{ $reservation->present()->total_price }} TL |
 | Günlük Fiyatı | {{ $reservation->present()->daily_price }} TL / 1 Gün |
+@endcomponent
+
+@component('mail::panel')
+Rezervasyon bilgilerinizde bir hata ile karşılaştıysanız lütfen bizimle iletişime {{ setting('theme::phone') }} geçiniz.
 @endcomponent
 
 @endcomponent

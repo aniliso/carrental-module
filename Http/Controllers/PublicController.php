@@ -7,13 +7,15 @@ use Illuminate\Foundation\Application;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Modules\Carrental\Http\Requests\Reservation\CreateReservationRequest;
-use Modules\Carrental\Mail\ReservationCreated;
+use Modules\Carrental\Jobs\ProcessGuestMail;
+use Modules\Carrental\Jobs\ProcessReservationMail;
 use Modules\Carrental\Repositories\CarBrandRepository;
 use Modules\Carrental\Repositories\CarClassRepository;
 use Modules\Carrental\Repositories\CarRepository;
 use Modules\Carrental\Repositories\ReservationRepository;
 use Modules\Carrental\Services\ReservationSession;
 use Modules\Core\Http\Controllers\BasePublicController;
+use DB;
 
 class PublicController extends BasePublicController
 {
@@ -190,13 +192,22 @@ class PublicController extends BasePublicController
 
     public function createReservation(CreateReservationRequest $request)
     {
-        $reservation = $this->session->create($request);
-
-        if($reservation = $this->reservation->create($reservation->toArray()))
-        {
-            \Mail::to(setting('theme::email'))->send(new ReservationCreated($reservation));
+        try {
+            DB::beginTransaction();
+            $reservation = $this->session->create($request);
+            if($reservation = $this->reservation->create($reservation->toArray())) {
+                DB::commit();
+                ProcessReservationMail::dispatch($reservation);
+                ProcessGuestMail::dispatch($reservation);
+            }
+            return redirect()->route('carrental.reservation')
+                ->withSuccess(trans('carrental::reservations.messages.reservation created'));
         }
-        return redirect()->route('carrental.reservation')
-                         ->withSuccess(trans('carrental::reservations.messages.reservation created'));
+        catch (\Exception $exception)
+        {
+            DB::rollBack();
+            return redirect()->route('carrental.reservation')
+                ->withErrors($exception->getMessage());
+        }
     }
 }

@@ -5,9 +5,10 @@ namespace Modules\Carrental\Mail;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Contracts\Queue\ShouldQueue;
 use Modules\Carrental\Entities\Reservation;
 
-class ReservationCreated extends Mailable
+class GuestMail extends Mailable
 {
     use Queueable, SerializesModels;
     /**
@@ -16,8 +17,9 @@ class ReservationCreated extends Mailable
     private $reservation;
 
     /**
-     * ReservationCreated constructor.
-     * @param Reservation $reservation
+     * Create a new message instance.
+     *
+     * @return void
      */
     public function __construct(Reservation $reservation)
     {
@@ -31,10 +33,8 @@ class ReservationCreated extends Mailable
      */
     public function build()
     {
-        return $this->view('carrental::emails.reservation')
-                    ->subject($this->reservation->id . ' No.lu Rezervasyon')
-                    ->cc($this->reservation->email)
-                    ->replyTo(setting('theme::email'), setting('theme::company-name'))
-                    ->with(['reservation'=>$this->reservation]);
+        return $this->subject($this->reservation->id . ' No.lu Rezervasyon')
+            ->replyTo(setting('theme::email'), setting('theme::company-name'))
+            ->markdown('carrental::emails.guest', ['reservation'=>$this->reservation]);
     }
 }
