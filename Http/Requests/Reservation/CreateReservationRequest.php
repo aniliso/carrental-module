@@ -19,7 +19,7 @@ class CreateReservationRequest extends BaseFormRequest
             'last_name'            => 'required',
             'mobile_phone'         => 'required',
             'email'                => 'required|email',
-            //'g-recaptcha-response' => 'required|captcha'
+            'g-recaptcha-response' => 'required|captcha'
         ];
     }
 
