@@ -15,6 +15,7 @@ use Modules\Carrental\Repositories\CarRepository;
 use Modules\Carrental\Repositories\CarSeriesRepository;
 use Modules\Core\Http\Controllers\Admin\AdminBaseController;
 use Modules\Media\Repositories\FileRepository;
+use DB;
 
 class CarController extends AdminBaseController
 {
@@ -114,37 +115,57 @@ class CarController extends AdminBaseController
     }
 
     /**
-     * Store a newly created resource in storage.
-     *
-     * @param  Request $request
-     * @return Response
+     * @param CarCreateRequest $request
+     * @return \Illuminate\Http\RedirectResponse
+     * @throws \Throwable
      */
     public function store(CarCreateRequest $request)
     {
-        $car = $this->car->create($request->all());
+        try {
+            DB::transaction(function () use ($request){
+                $car = $this->car->create($request->all());
 
-        if($class = $this->carclass->find($request->class_id)) {
-            $car->carclass()->associate($class);
-        }
-        if($brand = $this->carbrand->find($request->brand_id)) {
-            $car->brand()->associate($brand);
-            $car->save();
-        }
-        if($model = $this->carmodel->find($request->model_id)) {
-            $car->model()->associate($model);
-            $car->save();
-        }
-        if($series = $this->carseries->find($request->series_id)) {
-            $car->series()->associate($series);
-            $car->save();
-        }
-        if($car->prices()->count()==0) {
-            $price = new CarPrice();
-            $car->prices()->save($price);
-        }
+                if($class = $this->carclass->find($request->class_id)) {
+                    $car->carclass()->associate($class);
+                } else {
+                    throw new \Exception('Sınıf Eklenmedi');
+                }
 
-        return redirect()->route('admin.carrental.car.index')
-            ->withSuccess(trans('core::core.messages.resource created', ['name' => trans('carrental::cars.title.cars')]));
+                if($brand = $this->carbrand->find($request->brand_id)) {
+                    $car->brand()->associate($brand);
+                    $car->save();
+                } else {
+                    throw new \Exception('Marka Eklenmedi');
+                }
+
+                if($model = $this->carmodel->find($request->model_id)) {
+                    $car->model()->associate($model);
+                    $car->save();
+                } else {
+                    throw new \Exception('Model Eklenmedi');
+                }
+
+                if($series = $this->carseries->find($request->series_id)) {
+                    $car->series()->associate($series);
+                    $car->save();
+                } else {
+                    throw new \Exception('Seri Eklenmedi');
+                }
+
+                if($car->prices()->count()==0) {
+                    $price = new CarPrice();
+                    $car->prices()->save($price);
+                }
+            });
+
+            return redirect()->route('admin.carrental.car.index')
+                ->withSuccess(trans('core::core.messages.resource created', ['name' => trans('carrental::cars.title.cars')]));
+        }
+        catch(\Exception $exception) {
+            DB::rollBack();
+            return redirect()->route('admin.carrental.car.create')
+                ->withError($exception->getMessage());
+        }
     }
 
     /**
@@ -158,41 +179,66 @@ class CarController extends AdminBaseController
         return view('carrental::admin.cars.edit', compact('car'));
     }
 
+
     /**
-     * Update the specified resource in storage.
-     *
-     * @param  Car $car
-     * @param  Request $request
-     * @return Response
+     * @param Car $car
+     * @param CarUpdateRequest $request
+     * @return mixed
+     * @throws \Throwable
      */
     public function update(Car $car, CarUpdateRequest $request)
     {
-        $this->car->update($car, $request->all());
+        try {
+            DB::transaction(function() use ($car, $request){
 
-        if($class = $this->carclass->find($request->class_id)) {
-            $car->carclass()->associate($class);
-        }
-        if($brand = $this->carbrand->find($request->brand_id)) {
-            $car->brand()->associate($brand);
-        }
-        if($model = $this->carmodel->find($request->model_id)) {
-            $car->model()->associate($model);
-        }
-        if($series = $this->carseries->find($request->series_id)) {
-            $car->series()->associate($series);
-        }
+                $this->car->update($car, $request->all());
 
-        $prices = new CarPrice($request->get('prices'));
-        if($car->prices()->count()==0) {
-            $car->prices()->save($prices);
-        } else {
-            $car->prices()->update($prices->toArray());
+                if($class = $this->carclass->find($request->class_id)) {
+                    $car->carclass()->associate($class);
+                } else {
+                    throw new \Exception('Sınıf Eklenmedi');
+                }
+
+                if($brand = $this->carbrand->find($request->brand_id)) {
+                    $car->brand()->associate($brand);
+                    $car->save();
+                } else {
+                    throw new \Exception('Marka Eklenmedi');
+                }
+
+                if($model = $this->carmodel->find($request->model_id)) {
+                    $car->model()->associate($model);
+                    $car->save();
+                } else {
+                    throw new \Exception('Model Eklenmedi');
+                }
+
+                if($series = $this->carseries->find($request->series_id)) {
+                    $car->series()->associate($series);
+                    $car->save();
+                } else {
+                    throw new \Exception('Seri Eklenmedi');
+                }
+
+                $prices = new CarPrice($request->get('prices'));
+
+                if($car->prices()->count()==0) {
+                    $car->prices()->save($prices);
+                } else {
+                    $car->prices()->update($prices->toArray());
+                }
+
+                $car->save();
+            });
+
+            return redirect()->route('admin.carrental.car.index')
+                ->withSuccess(trans('core::core.messages.resource updated', ['name' => trans('carrental::cars.title.cars')]));
         }
-
-        $car->save();
-
-        return redirect()->route('admin.carrental.car.index')
-            ->withSuccess(trans('core::core.messages.resource updated', ['name' => trans('carrental::cars.title.cars')]));
+        catch (\Exception $exception)
+        {
+            return redirect()->route('admin.carrental.car.update', $car->id)
+                ->withError($exception->getMessage());
+        }
     }
 
     /**
