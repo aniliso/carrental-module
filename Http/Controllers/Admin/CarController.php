@@ -176,7 +176,9 @@ class CarController extends AdminBaseController
      */
     public function edit(Car $car)
     {
-        return view('carrental::admin.cars.edit', compact('car'));
+        $models = $this->carmodel->getByAttributes(['brand_id'=>$car->brand_id])->pluck('name', 'id');
+        $series = $this->carseries->getByAttributes(['model_id'=>$car->model_id])->pluck('name', 'id');
+        return view('carrental::admin.cars.edit', compact('car', 'models', 'series'));
     }
 
 

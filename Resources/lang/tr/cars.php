@@ -93,6 +93,7 @@ return [
         ],
         'engine_capacity'    => 'Motor Hacmi',
         'horsepower'         => 'Güç',
+        'class_id'           => 'Sınıf',
         'brand_id'           => 'Marka',
         'model_id'           => 'Model',
         'series_id'          => 'Seri',

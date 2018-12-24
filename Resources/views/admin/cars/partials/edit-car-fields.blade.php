@@ -1,197 +1,209 @@
-<div class="box-body">
+<div class="box-body form-horizontal">
     <div class="col-md-6 col-sm-12 col-xs-12">
-        {!! BSControlGroup::generate(
-            BSForm::label('plate_no', trans('carrental::cars.form.plate_no')),
-            BSForm::text('plate_no', old('plate_no', $car->plate_no ?? null)),
-            BSForm::help($errors->first('plate_no')),
-            4
-        )->withAttributes(['class'=>$errors->has("plate_no") ? ' has-error' : '']) !!}
-
-        {!! BSControlGroup::generate(
-            BSForm::label('model_year', trans('carrental::cars.form.model_year')),
-            BSForm::text('model_year', old('model_year', $car->model_year ?? null)),
-            BSForm::help($errors->first('model_year')),
-            4
-        )->withAttributes(['class'=>$errors->has("model_year") ? ' has-error' : '']) !!}
-
-        {!! BSControlGroup::generate(
-            BSForm::label('chassis_no', trans('carrental::cars.form.chassis_no')),
-            BSForm::text('chassis_no', old('chassis_no', $car->chassis_no ?? null)),
-            BSForm::help($errors->first('chassis_no')),
-            4
-        )->withAttributes(['class'=>$errors->has("chassis_no") ? ' has-error' : '']) !!}
-
-        {!! BSControlGroup::generate(
-            BSForm::label('motor_no', trans('carrental::cars.form.motor_no')),
-            BSForm::text('motor_no', old('motor_no', $car->motor_no ?? null)),
-            BSForm::help($errors->first('motor_no')),
-            4
-        )->withAttributes(['class'=>$errors->has("motor_no") ? ' has-error' : '']) !!}
-
-        {!! BSControlGroup::generate(
-            BSForm::label('current_km', trans('carrental::cars.form.current_km')),
-            BSInputGroup::withContents(BSForm::text('current_km', old('current_km', $car->current_km ?? null), ['class'=>'text-right']))->append('km'),
-            BSForm::help($errors->first('current_km')),
-            4
-        )->withAttributes(['class'=>$errors->has("current_km") ? ' has-error' : '']) !!}
-
-        {!! BSControlGroup::generate(
-            BSForm::label('max_km', trans('carrental::cars.form.max_km')),
-            BSInputGroup::withContents(BSForm::text('max_km', old('max_km', $car->max_km ?? null), ['class'=>'text-right']))->append('km'),
-            BSForm::help($errors->first('max_km')),
-            4
-        )->withAttributes(['class'=>$errors->has("max_km") ? ' has-error' : '']) !!}
-
-        {!! BSControlGroup::generate(
-            BSForm::label('period_km', trans('carrental::cars.form.period_km')),
-            BSInputGroup::withContents(BSForm::text('period_km', old('period_km', $car->period_km ?? null), ['class'=>'text-right']))->append('km'),
-            BSForm::help($errors->first('period_km')),
-            4
-        )->withAttributes(['class'=>$errors->has("period_km") ? ' has-error' : '']) !!}
-
         <div class="form-group">
-            {!! BSForm::label('identity_no', trans('carrental::cars.form.identity_no').'/'.trans('carrental::cars.form.tax_no'), ['class'=>'col-sm-4']) !!}
+            {!! Form::label('plate_no', trans('carrental::cars.form.plate_no'), ['class'=>'control-label col-sm-4']) !!}
             <div class="col-sm-8">
-                <div class="row">
-                    <div class="col-sm-6">
-                        {!! BSForm::text('identity_no', old('identity_no', $car->identity_no ?? null)) !!}
-                        {!! BSForm::help($errors->first('identity_no')) !!}
-                    </div>
-                    <div class="col-sm-6">
-                        {!! BSForm::text('tax_no', old('tax_no', $car->tax_no ?? null)) !!}
-                        {!! BSForm::help($errors->first('tax_no')) !!}
-                    </div>
+                {!! Form::text('plate_no', old('plate_no', $car->plate_no ?? null), ['class'=>'form-control', 'placeholder'=>trans('carrental::cars.form.plate_no')]) !!}
+                {!! $errors->first("plate_no", '<span class="help-block">:message</span>') !!}
+            </div>
+        </div>
+        <div class="form-group">
+            {!! Form::label('model_year', trans('carrental::cars.form.model_year'), ['class'=>'control-label col-sm-4']) !!}
+            <div class="col-sm-8">
+                {!! Form::text('model_year', old('model_year', $car->model_year ?? null), ['class'=>'form-control', 'placeholder'=>trans('carrental::cars.form.model_year')]) !!}
+                {!! $errors->first("model_year", '<span class="help-block">:message</span>') !!}
+            </div>
+        </div>
+        <div class="form-group">
+            {!! Form::label('chassis_no', trans('carrental::cars.form.chassis_no'), ['class'=>'control-label col-sm-4']) !!}
+            <div class="col-sm-8">
+                {!! Form::text('chassis_no', old('chassis_no', $car->chassis_no ?? null), ['class'=>'form-control', 'placeholder'=>trans('carrental::cars.form.chassis_no')]) !!}
+                {!! $errors->first("chassis_no", '<span class="help-block">:message</span>') !!}
+            </div>
+        </div>
+        <div class="form-group">
+            {!! Form::label('motor_no', trans('carrental::cars.form.motor_no'), ['class'=>'control-label col-sm-4']) !!}
+            <div class="col-sm-8">
+                {!! Form::text('motor_no', old('motor_no', $car->motor_no ?? null), ['class'=>'form-control', 'placeholder'=>trans('carrental::cars.form.motor_no')]) !!}
+                {!! $errors->first("motor_no", '<span class="help-block">:message</span>') !!}
+            </div>
+        </div>
+        <div class="form-group">
+            {!! Form::label('current_km', trans('carrental::cars.form.current_km'), ['class'=>'control-label col-sm-4']) !!}
+            <div class="col-sm-8">
+                <div class="input-group">
+                    {!! Form::text('current_km', old('current_km', $car->current_km ?? null), ['class'=>'form-control', 'placeholder'=>trans('carrental::cars.form.current_km')]) !!}
+                    <div class="input-group-addon">km</div>
+                    {!! $errors->first("current_km", '<span class="help-block">:message</span>') !!}
                 </div>
             </div>
         </div>
-
         <div class="form-group">
-            {!! BSForm::label('license_key', trans('carrental::cars.form.license_key').'/'.trans('carrental::cars.form.license_no'), ['class'=>'col-sm-4']) !!}
+            {!! Form::label('max_km', trans('carrental::cars.form.max_km'), ['class'=>'control-label col-sm-4']) !!}
             <div class="col-sm-8">
-                <div class="row">
-                    <div class="col-sm-3 {{ $errors->has("license_key") ? ' has-error' : '' }}">
-                        {!! BSForm::text('license_key', old('license_key', $car->license_key ?? null)) !!}
-                    </div>
-                    <div class="col-sm-9 {{ $errors->has("license_no") ? ' has-error' : '' }}">
-                        {!! BSForm::text('license_no', old('license_no', $car->license_no ?? null)) !!}
-
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-sm-12 {{ $errors->has("license_key") || $errors->has("license_no") ? ' has-error' : '' }}">
-                        {!! BSForm::help($errors->first('license_no')) !!}
-                        {!! BSForm::help($errors->first('license_key')) !!}
-                    </div>
+                <div class="input-group">
+                    {!! Form::text('max_km', old('max_km', $car->max_km ?? null), ['class'=>'form-control', 'placeholder'=>trans('carrental::cars.form.max_km')]) !!}
+                    <div class="input-group-addon">km</div>
+                    {!! $errors->first("max_km", '<span class="help-block">:message</span>') !!}
                 </div>
             </div>
         </div>
-
-
-        {!! BSControlGroup::generate(
-            BSForm::label('licensed_at', trans('carrental::cars.form.licensed_at')),
-            BSInputGroup::withContents(BSForm::text('licensed_at', old('licensed_at', isset($car->licensed_at) ? $car->licensed_at->format('Y-m-d') : null), ['class'=>'date', 'id'=>'licensed_at']))->append('<span class="glyphicon glyphicon-calendar"></span>'),
-            BSForm::help($errors->first('licensed_at')),
-            4
-        )->withAttributes(['class'=>$errors->has("licensed_at") ? ' has-error' : '']) !!}
-
-        {!! BSControlGroup::generate(
-            BSForm::label('current_fuel', trans('carrental::cars.form.current_fuel')),
-            BSInputGroup::withContents(BSForm::text('current_fuel', old('current_fuel', $car->current_fuel ?? null), ['class'=>'text-right']))->append('/12'),
-            BSForm::help($errors->first('current_fuel')),
-            4
-        )->withAttributes(['class'=>$errors->has("current_fuel") ? ' has-error' : '']) !!}
-
-        {!! BSControlGroup::generate(
-            BSForm::label('description', trans('carrental::cars.form.description')),
-            BSForm::textarea('description', old('description', $car->description ?? null), ['rows'=>3]),
-            BSForm::help($errors->first('description')),
-            4
-        )->withAttributes(['class'=>$errors->has("description") ? ' has-error' : '']) !!}
+        <div class="form-group">
+            {!! Form::label('period_km', trans('carrental::cars.form.period_km'), ['class'=>'control-label col-sm-4']) !!}
+            <div class="col-sm-8">
+                <div class="input-group">
+                    {!! Form::text('period_km', old('period_km', $car->period_km ?? null), ['class'=>'form-control', 'placeholder'=>trans('carrental::cars.form.period_km')]) !!}
+                    <div class="input-group-addon">km</div>
+                    {!! $errors->first("period_km", '<span class="help-block">:message</span>') !!}
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            {!! Form::label('identity_no', trans('carrental::cars.form.identity_no'), ['class'=>'control-label col-sm-4']) !!}
+            <div class="col-sm-4">
+                {!! Form::text('identity_no', old('identity_no', $car->identity_no ?? null), ['class'=>'form-control', 'placeholder'=>trans('carrental::cars.form.identity_no')]) !!}
+                {!! $errors->first("identity_no", '<span class="help-block">:message</span>') !!}
+            </div>
+            <div class="col-sm-4">
+                {!! Form::text('tax_no', old('tax_no', $car->tax_no ?? null), ['class'=>'form-control', 'placeholder'=>trans('carrental::cars.form.tax_no')]) !!}
+                {!! $errors->first("tax_no", '<span class="help-block">:message</span>') !!}
+            </div>
+        </div>
+        <div class="form-group">
+            {!! Form::label('license_key', trans('carrental::cars.form.license_key'), ['class'=>'control-label col-sm-4']) !!}
+            <div class="col-sm-4">
+                {!! Form::text('license_key', old('license_key', $car->license_key ?? null), ['class'=>'form-control', 'placeholder'=>trans('carrental::cars.form.license_key')]) !!}
+                {!! $errors->first("license_key", '<span class="help-block">:message</span>') !!}
+            </div>
+            <div class="col-sm-4">
+                {!! Form::text('license_no', old('license_no', $car->license_no ?? null), ['class'=>'form-control', 'placeholder'=>trans('carrental::cars.form.license_no')]) !!}
+                {!! $errors->first("license_no", '<span class="help-block">:message</span>') !!}
+            </div>
+        </div>
+        <div class="form-group">
+            {!! Form::label('licensed_at', trans('carrental::cars.form.licensed_at'), ['class'=>'control-label col-sm-4']) !!}
+            <div class="col-sm-8">
+                <div class="input-group">
+                    {!! Form::text('licensed_at', old('licensed_at', $car->licensed_at->format('Y-m-d') ?? null), ['class'=>'form-control', 'placeholder'=>trans('carrental::cars.form.licensed_at')]) !!}
+                    <div class="input-group-addon"><i class="fa fa-calendar-o"></i></div>
+                    {!! $errors->first("licensed_at", '<span class="help-block">:message</span>') !!}
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            {!! Form::label('current_fuel', trans('carrental::cars.form.current_fuel'), ['class'=>'control-label col-sm-4']) !!}
+            <div class="col-sm-8">
+                <div class="input-group">
+                    {!! Form::text('current_fuel', old('current_fuel', $car->current_fuel ?? null), ['class'=>'form-control', 'placeholder'=>trans('carrental::cars.form.current_fuel')]) !!}
+                    <div class="input-group-addon">/12</div>
+                    {!! $errors->first("current_fuel", '<span class="help-block">:message</span>') !!}
+                </div>
+            </div>
+        </div>
+        <div class="form-group">
+            {!! Form::label('description', trans('carrental::cars.form.description'), ['class'=>'control-label col-sm-4']) !!}
+            <div class="col-sm-8">
+                {!! Form::textarea('description', old('description', $car->description ?? null), ['rows'=>3, 'class'=>'form-control', 'placeholder'=>trans('carrental::cars.form.description')]) !!}
+                {!! $errors->first("description", '<span class="help-block">:message</span>') !!}
+            </div>
+        </div>
     </div>
     <div class="col-md-6 col-sm-12 col-xs-12">
-        {!! BSForm::hidden('status', 0) !!}
-        {!! BSControlGroup::generate(
-            BSForm::label('status', trans('carrental::cars.form.status')),
-            BSForm::checkbox('status', "1", $car->status, ['class'=>'flat-blue']),
-            BSForm::help($errors->first('status')),
-            4
-        ) !!}
+        <div class="form-group">
+            {!! Form::hidden('status', 0) !!}
+            {!! Form::label('status', trans('carrental::cars.form.status'), ['class'=>'control-label col-sm-4']) !!}
+            <div class="col-sm-8">
+                {!! Form::checkbox('status', 1, old('status', $car->status), ['class'=>'flat-blue']) !!}
+                {!! $errors->first("status", '<span class="help-block">:message</span>') !!}
+            </div>
+        </div>
 
-        {!! BSControlGroup::generate(
-            BSForm::label('available_status', trans('carrental::cars.form.available_status')),
-            BSForm::select('available_status', $availableStatuses, CarAvailableStatus::get($car->available_status), ['class'=>'semantic ui fluid search dropdown']),
-            BSForm::help($errors->first('available_status')),
-            4
-        )->withAttributes(['class'=>$errors->has("available_status") ? ' has-error' : '']) !!}
+        <div class="form-group">
+            {!! Form::label('available_status', trans('carrental::cars.form.available_status'), ['class'=>'control-label col-sm-4']) !!}
+            <div class="col-sm-8">
+                {!! Form::select('available_status', $availableStatuses, $car->available_status, ['class'=>'semantic ui fluid search dropdown']) !!}
+                {!! $errors->first("available_status", '<span class="help-block">:message</span>') !!}
+            </div>
+        </div>
 
-        {!! BSControlGroup::generate(
-            BSForm::label('class_id', trans('carrental::carclasses.title.carclasses')),
-            BSForm::select('class_id', $classLists, $car->carclass->id, ['class'=>'semantic ui fluid search dropdown']),
-            BSForm::help($errors->first('class_id')),
-            4
-        )->withAttributes(['class'=>$errors->has("brand_id") ? ' has-error' : '']) !!}
+        <div class="form-group">
+            {!! Form::label('class_id', trans('carrental::cars.form.class_id'), ['class'=>'control-label col-sm-4']) !!}
+            <div class="col-sm-8">
+                {!! Form::select('class_id', $classLists, old('class_id', $car->class_id ?? null), ['class'=>'semantic ui fluid search dropdown']) !!}
+                {!! $errors->first("class_id", '<span class="help-block">:message</span>') !!}
+            </div>
+        </div>
 
-        {!! BSControlGroup::generate(
-            BSForm::label('brand_id', trans('carrental::carbrands.title.carbrands')),
-            BSForm::select('brand_id', $brandLists, $car->brand->id, ['class'=>'brand ui fluid search dropdown', 'v-model'=>'selected']),
-            BSForm::help($errors->first('brand_id')),
-            4
-        )->withAttributes(['class'=>$errors->has("brand_id") ? ' has-error' : '', 'id'=>'brand']) !!}
+        <div class="form-group">
+            {!! Form::label('brand_id', trans('carrental::cars.form.brand_id'), ['class'=>'control-label col-sm-4']) !!}
+            <div class="col-sm-8">
+                {!! Form::select('brand_id', $brandLists, old('brand_id', $car->brand_id ?? null), ['class'=>'brand ui fluid search dropdown']) !!}
+                {!! $errors->first("brand_id", '<span class="help-block">:message</span>') !!}
+            </div>
+        </div>
 
-        {!! BSControlGroup::generate(
-            BSForm::label('model_id', trans('carrental::carmodels.title.carmodels')),
-            BSForm::select('model_id', $modelLists, $car->model->id, ['class'=>'model ui fluid search dropdown']),
-            BSForm::help($errors->first('model_id')),
-            4
-        )->withAttributes(['class'=>$errors->has("model_id") ? ' has-error' : '']) !!}
+        <div class="form-group">
+            {!! Form::label('model_id', trans('carrental::cars.form.model_id'), ['class'=>'control-label col-sm-4']) !!}
+            <div class="col-sm-8">
+                {!! Form::select('model_id', $models, old('model_id', $car->model_id ?? null), ['class'=>'model ui fluid search dropdown']) !!}
+                {!! $errors->first("model_id", '<span class="help-block">:message</span>') !!}
+            </div>
+        </div>
 
-        {!! BSControlGroup::generate(
-            BSForm::label('series_id', trans('carrental::carseries.title.carseries')),
-            BSForm::select('series_id', $seriesLists, $car->series->id ?? null, ['class'=>'series ui fluid search dropdown']),
-            BSForm::help($errors->first('series_id')),
-            4
-        )->withAttributes(['class'=>$errors->has("series_id") ? ' has-error' : '']) !!}
+        <div class="form-group">
+            {!! Form::label('series_id', trans('carrental::cars.form.series_id'), ['class'=>'control-label col-sm-4']) !!}
+            <div class="col-sm-8">
+                {!! Form::select('series_id', $series, old('series_id', $car->series_id ?? null), ['class'=>'series ui fluid search dropdown']) !!}
+                {!! $errors->first("series_id", '<span class="help-block">:message</span>') !!}
+            </div>
+        </div>
 
-        {!! BSControlGroup::generate(
-            BSForm::label('fuel_type', trans('carrental::cars.form.fuel_type')),
-            BSForm::select('fuel_type', $fuels, $car->fuel_type, ['class'=>'semantic ui fluid search dropdown']),
-            BSForm::help($errors->first('fuel_type')),
-            4
-        )->withAttributes(['class'=>$errors->has("fuel_type") ? ' has-error' : '']) !!}
+        <div class="form-group">
+            {!! Form::label('fuel_type', trans('carrental::cars.form.fuel_type'), ['class'=>'control-label col-sm-4']) !!}
+            <div class="col-sm-8">
+                {!! Form::select('fuel_type', $fuels, old('fuel_type', $car->fuel_type ?? null), ['class'=>'semantic ui fluid search dropdown']) !!}
+                {!! $errors->first("fuel_type", '<span class="help-block">:message</span>') !!}
+            </div>
+        </div>
 
-        {!! BSControlGroup::generate(
-            BSForm::label('transmission', trans('carrental::cars.form.transmission')),
-            BSForm::select('transmission', $transmissions, $car->transmission, ['class'=>'semantic ui fluid search dropdown']),
-            BSForm::help($errors->first('transmission')),
-            4
-        )->withAttributes(['class'=>$errors->has("transmission") ? ' has-error' : '']) !!}
+        <div class="form-group">
+            {!! Form::label('transmission', trans('carrental::cars.form.transmission'), ['class'=>'control-label col-sm-4']) !!}
+            <div class="col-sm-8">
+                {!! Form::select('transmission', $transmissions, old('transmission', $car->transmission ?? null), ['class'=>'semantic ui fluid search dropdown']) !!}
+                {!! $errors->first("transmission", '<span class="help-block">:message</span>') !!}
+            </div>
+        </div>
 
-        {!! BSControlGroup::generate(
-            BSForm::label('body_type', trans('carrental::cars.form.body_type')),
-            BSForm::select('body_type', $body_types, $car->body_type, ['class'=>'semantic ui fluid search dropdown']),
-            BSForm::help($errors->first('body_type')),
-            4
-        )->withAttributes(['class'=>$errors->has("body_type") ? ' has-error' : '']) !!}
+        <div class="form-group">
+            {!! Form::label('body_type', trans('carrental::cars.form.body_type'), ['class'=>'control-label col-sm-4']) !!}
+            <div class="col-sm-8">
+                {!! Form::select('body_type', $body_types, old('body_type', $car->body_type ?? null), ['class'=>'semantic ui fluid search dropdown']) !!}
+                {!! $errors->first("body_type", '<span class="help-block">:message</span>') !!}
+            </div>
+        </div>
 
-        {!! BSControlGroup::generate(
-            BSForm::label('color', trans('carrental::cars.form.color')),
-            BSForm::select('color', $colors, $car->color, ['class'=>'semantic ui fluid search dropdown']),
-            BSForm::help($errors->first('color')),
-            4
-        )->withAttributes(['class'=>$errors->has("color") ? ' has-error' : '']) !!}
+        <div class="form-group">
+            {!! Form::label('color', trans('carrental::cars.form.color'), ['class'=>'control-label col-sm-4']) !!}
+            <div class="col-sm-8">
+                {!! Form::select('color', $colors, old('color', $car->color ?? null), ['class'=>'semantic ui fluid search dropdown']) !!}
+                {!! $errors->first("color", '<span class="help-block">:message</span>') !!}
+            </div>
+        </div>
 
-        {!! BSControlGroup::generate(
-            BSForm::label('engine_capacity', trans('carrental::cars.form.engine_capacity')),
-            BSForm::select('engine_capacity', $engineCapacities, $car->engine_capacity, ['class'=>'semantic ui fluid search dropdown']),
-            BSForm::help($errors->first('engine_capacity')),
-            4
-        )->withAttributes(['class'=>$errors->has("engine_capacity") ? ' has-error' : '']) !!}
+        <div class="form-group">
+            {!! Form::label('engine_capacity', trans('carrental::cars.form.engine_capacity'), ['class'=>'control-label col-sm-4']) !!}
+            <div class="col-sm-8">
+                {!! Form::select('engine_capacity', $engineCapacities, old('engine_capacity', $car->engine_capacity ?? null), ['class'=>'semantic ui fluid search dropdown']) !!}
+                {!! $errors->first("engine_capacity", '<span class="help-block">:message</span>') !!}
+            </div>
+        </div>
 
-        {!! BSControlGroup::generate(
-            BSForm::label('horsepower', trans('carrental::cars.form.horsepower')),
-            BSForm::select('horsepower', $horsePowers, $car->horsepower, ['class'=>'semantic ui fluid search dropdown']),
-            BSForm::help($errors->first('horsepower')),
-            4
-        )->withAttributes(['class'=>$errors->has("horsepower") ? ' has-error' : '']) !!}
+        <div class="form-group">
+            {!! Form::label('horsepower', trans('carrental::cars.form.horsepower'), ['class'=>'control-label col-sm-4']) !!}
+            <div class="col-sm-8">
+                {!! Form::select('horsepower', $horsePowers, old('horsepower', $car->horsepower ?? null), ['class'=>'semantic ui fluid search dropdown']) !!}
+                {!! $errors->first("horsepower", '<span class="help-block">:message</span>') !!}
+            </div>
+        </div>
     </div>
 </div>

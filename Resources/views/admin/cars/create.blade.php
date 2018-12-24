@@ -81,33 +81,68 @@
             $('.category.ui.dropdown').dropdown({
                 allowAdditions: true
             });
+
+
             $.fn.api.settings.api = {
-               'get models': '{{ route('api.carrental.model') }}?brand_id='+"{id}",
-               'get series': '{{ route('api.carrental.series') }}?model_id='+"{id}"
+                'get models': '{{ route('api.carrental.model') }}?brand_id={id}',
+                'get series': '{{ route('api.carrental.series') }}?model_id={id}'
             };
+
             var brand = $('.brand.ui.dropdown').dropdown({
+                saveRemoteData: false
+            });
+
+            var model = $('.model.ui.dropdown').dropdown({
+                saveRemoteData: false
+            });
+
+            var series = $('.series.ui.dropdown').dropdown({
+                saveRemoteData: false
+            });
+
+            function getSeries(model_id) {
+                series.dropdown({
+                    saveRemoteData: false,
+                    apiSettings: {
+                        action: 'get series',
+                        urlData: {_token: '{{ csrf_token() }}', id : model_id},
+                        cache: false
+                    }
+                });
+            }
+
+            function getModel(brand_id) {
+                model.dropdown({
+                    saveRemoteData: false,
+                    apiSettings: {
+                        action: 'get models',
+                        urlData: {_token: '{{ csrf_token() }}', id : brand_id},
+                        cache: false,
+                        on: "now"
+                    },
+                    onChange: function(value, text) {
+                        getSeries(value);
+                    }
+                });
+            }
+
+            model.on('mouseenter', function(){
+                var brand_id = brand.dropdown('get value');
+                getModel(brand_id);
+            });
+
+            brand.dropdown({
                 saveRemoteData: false,
                 onChange: function(value, text) {
-                    $('.model.ui.dropdown').dropdown('clear').dropdown({
-                        saveRemoteData: false,
-                        apiSettings: {
-                            action: 'get models',
-                            urlData: {_token: '{{ csrf_token() }}', id : value},
-                            cache: false
-                        },
-                        onChange: function(value, text) {
-                            $('.series.ui.dropdown').dropdown('clear').dropdown({
-                                saveRemoteData: false,
-                                apiSettings: {
-                                    action: 'get series',
-                                    urlData: {_token: '{{ csrf_token() }}', id : value},
-                                    cache: false
-                                }
-                            });
-                        }
-                    });
+                    getModel(value);
                 }
             });
+
+            brand.on('click', function(){
+                model.dropdown('clear');
+                series.dropdown('clear');
+            });
+
             $('.semantic.ui.dropdown').dropdown({
                 allowAdditions: true
             });
