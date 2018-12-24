@@ -120,7 +120,7 @@
         <div class="form-group">
             {!! Form::label('available_status', trans('carrental::cars.form.available_status'), ['class'=>'control-label col-sm-4']) !!}
             <div class="col-sm-8">
-                {!! Form::select('available_status', $availableStatuses, null, ['class'=>'semantic ui fluid search dropdown']) !!}
+                {!! Form::select('available_status', $availableStatuses, old('available_status'), ['class'=>'semantic ui fluid search dropdown']) !!}
                 {!! $errors->first("available_status", '<span class="help-block">:message</span>') !!}
             </div>
         </div>
@@ -128,7 +128,7 @@
         <div class="form-group">
             {!! Form::label('class_id', trans('carrental::cars.form.class_id'), ['class'=>'control-label col-sm-4']) !!}
             <div class="col-sm-8">
-                {!! Form::select('class_id', $classLists, null, ['class'=>'semantic ui fluid search dropdown']) !!}
+                {!! Form::select('class_id', $classLists, old('class_id'), ['class'=>'semantic ui fluid search dropdown']) !!}
                 {!! $errors->first("class_id", '<span class="help-block">:message</span>') !!}
             </div>
         </div>
@@ -136,7 +136,7 @@
         <div class="form-group">
             {!! Form::label('brand_id', trans('carrental::cars.form.brand_id'), ['class'=>'control-label col-sm-4']) !!}
             <div class="col-sm-8">
-                {!! Form::select('brand_id', $brandLists, null, ['class'=>'brand ui fluid search dropdown']) !!}
+                {!! Form::select('brand_id', $brandLists, old('brand_id'), ['class'=>'brand ui fluid search dropdown']) !!}
                 {!! $errors->first("brand_id", '<span class="help-block">:message</span>') !!}
             </div>
         </div>
@@ -144,7 +144,7 @@
         <div class="form-group">
             {!! Form::label('model_id', trans('carrental::cars.form.model_id'), ['class'=>'control-label col-sm-4']) !!}
             <div class="col-sm-8">
-                {!! Form::select('model_id', [], null, ['class'=>'model ui fluid search dropdown']) !!}
+                {!! Form::select('model_id', [], old('model_id'), ['class'=>'model ui fluid search dropdown']) !!}
                 {!! $errors->first("model_id", '<span class="help-block">:message</span>') !!}
             </div>
         </div>
@@ -152,7 +152,7 @@
         <div class="form-group">
             {!! Form::label('series_id', trans('carrental::cars.form.series_id'), ['class'=>'control-label col-sm-4']) !!}
             <div class="col-sm-8">
-                {!! Form::select('series_id', [], null, ['class'=>'series ui fluid search dropdown']) !!}
+                {!! Form::select('series_id', [], old('series_id'), ['class'=>'series ui fluid search dropdown']) !!}
                 {!! $errors->first("series_id", '<span class="help-block">:message</span>') !!}
             </div>
         </div>
@@ -160,7 +160,7 @@
         <div class="form-group">
             {!! Form::label('fuel_type', trans('carrental::cars.form.fuel_type'), ['class'=>'control-label col-sm-4']) !!}
             <div class="col-sm-8">
-                {!! Form::select('fuel_type', $fuels, null, ['class'=>'semantic ui fluid search dropdown']) !!}
+                {!! Form::select('fuel_type', $fuels, old('fuel_type'), ['class'=>'semantic ui fluid search dropdown']) !!}
                 {!! $errors->first("fuel_type", '<span class="help-block">:message</span>') !!}
             </div>
         </div>
@@ -168,7 +168,7 @@
         <div class="form-group">
             {!! Form::label('transmission', trans('carrental::cars.form.transmission'), ['class'=>'control-label col-sm-4']) !!}
             <div class="col-sm-8">
-                {!! Form::select('transmission', $transmissions, null, ['class'=>'semantic ui fluid search dropdown']) !!}
+                {!! Form::select('transmission', $transmissions, old('transmission'), ['class'=>'semantic ui fluid search dropdown']) !!}
                 {!! $errors->first("transmission", '<span class="help-block">:message</span>') !!}
             </div>
         </div>
@@ -176,7 +176,7 @@
         <div class="form-group">
             {!! Form::label('body_type', trans('carrental::cars.form.body_type'), ['class'=>'control-label col-sm-4']) !!}
             <div class="col-sm-8">
-                {!! Form::select('body_type', $body_types, null, ['class'=>'semantic ui fluid search dropdown']) !!}
+                {!! Form::select('body_type', $body_types, old('body_type'), ['class'=>'semantic ui fluid search dropdown']) !!}
                 {!! $errors->first("body_type", '<span class="help-block">:message</span>') !!}
             </div>
         </div>
@@ -184,7 +184,7 @@
         <div class="form-group">
             {!! Form::label('color', trans('carrental::cars.form.color'), ['class'=>'control-label col-sm-4']) !!}
             <div class="col-sm-8">
-                {!! Form::select('color', $colors, null, ['class'=>'semantic ui fluid search dropdown']) !!}
+                {!! Form::select('color', $colors, old('color'), ['class'=>'semantic ui fluid search dropdown']) !!}
                 {!! $errors->first("color", '<span class="help-block">:message</span>') !!}
             </div>
         </div>
@@ -192,7 +192,7 @@
         <div class="form-group">
             {!! Form::label('engine_capacity', trans('carrental::cars.form.engine_capacity'), ['class'=>'control-label col-sm-4']) !!}
             <div class="col-sm-8">
-                {!! Form::select('engine_capacity', $engineCapacities, null, ['class'=>'semantic ui fluid search dropdown']) !!}
+                {!! Form::select('engine_capacity', $engineCapacities, old('engine_capacity'), ['class'=>'semantic ui fluid search dropdown']) !!}
                 {!! $errors->first("engine_capacity", '<span class="help-block">:message</span>') !!}
             </div>
         </div>
@@ -200,7 +200,7 @@
         <div class="form-group">
             {!! Form::label('horsepower', trans('carrental::cars.form.horsepower'), ['class'=>'control-label col-sm-4']) !!}
             <div class="col-sm-8">
-                {!! Form::select('horsepower', $horsePowers, null, ['class'=>'semantic ui fluid search dropdown']) !!}
+                {!! Form::select('horsepower', $horsePowers, old('horsepower'), ['class'=>'semantic ui fluid search dropdown']) !!}
                 {!! $errors->first("horsepower", '<span class="help-block">:message</span>') !!}
             </div>
         </div>

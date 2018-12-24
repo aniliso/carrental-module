@@ -84,7 +84,7 @@
             {!! Form::label('licensed_at', trans('carrental::cars.form.licensed_at'), ['class'=>'control-label col-sm-4']) !!}
             <div class="col-sm-8">
                 <div class="input-group">
-                    {!! Form::text('licensed_at', old('licensed_at', isset($car->licensed_at) ? $car->licensed_at->format('Y-m-d') : null), ['class'=>'form-control', 'placeholder'=>trans('carrental::cars.form.licensed_at')]) !!}
+                    {!! Form::text('licensed_at', old('licensed_at', $car->licensed_at ? $car->licensed_at->format('Y-m-d') : null), ['class'=>'form-control', 'placeholder'=>trans('carrental::cars.form.licensed_at')]) !!}
                     <div class="input-group-addon"><i class="fa fa-calendar-o"></i></div>
                     {!! $errors->first("licensed_at", '<span class="help-block">:message</span>') !!}
                 </div>
