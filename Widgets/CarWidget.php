@@ -44,4 +44,14 @@ class CarWidget
         $brands = $this->carBrands->all();
         return view('carrental::widgets.'.$view, compact('brands'));
     }
+
+    public function getCarByClass($limit=6, $view='class')
+    {
+        $cars = collect();
+        $classes = $this->carClass->all()->sortBy('ordering');
+        foreach ($classes as $class) {
+            $cars->put($class->id, $this->car->getByAttributes(['class_id'=>$class->id])->sortBy('ordering')->take($limit));
+        }
+        return view('carrental::widgets.'.$view, compact('classes', 'cars'));
+    }
 }
