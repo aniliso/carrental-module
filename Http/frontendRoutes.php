@@ -43,6 +43,11 @@ $router->group([], function (Router $router) {
         'uses' => 'PublicController@createReservation',
         'as'   => 'carrental.reservation.create'
     ]);
+
+    $router->get(LaravelLocalization::transRoute('carrental::routes.complete'), [
+        'uses' => 'PublicController@complete',
+        'as'   => 'carrental.complete'
+    ]);
 });
 
 

@@ -200,7 +200,8 @@ class PublicController extends BasePublicController
                 ProcessReservationMail::dispatch($reservation);
                 ProcessGuestMail::dispatch($reservation);
             }
-            return redirect()->route('carrental.reservation')
+            return redirect()->route('carrental.complete')
+                ->with(['reservation' => $reservation])
                 ->withSuccess(trans('carrental::reservations.messages.reservation created'));
         }
         catch (\Exception $exception)
@@ -208,6 +209,23 @@ class PublicController extends BasePublicController
             DB::rollBack();
             return redirect()->route('carrental.reservation')
                 ->withErrors($exception->getMessage());
+        }
+    }
+
+    public function complete()
+    {
+        if(\Session::has('reservation')) {
+
+            $reservation = \Session::get('reservation');
+            $car = $this->car->find($reservation->car_id);
+
+            $this->setTitle(trans('themes::carrental.titles.reservation car', ['car'=>$car->fullname]))
+                ->setDescription(trans('themes::carrental.descriptions.car', ['car'=>$car->fullname]));
+
+            return view('carrental::complete', compact('car', 'reservation'));
+
+        } else {
+            return redirect()->route('carrental.index');
         }
     }
 }

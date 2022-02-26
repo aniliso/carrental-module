@@ -61,6 +61,7 @@ class CarrentalServiceProvider extends ServiceProvider
     {
         $this->publishConfig('carrental', 'permissions');
         $this->publishConfig('carrental', 'config');
+        $this->publishConfig('carrental', 'settings');
 
 		$this->loadMigrationsFrom(__DIR__ . '/../Database/Migrations');
 
